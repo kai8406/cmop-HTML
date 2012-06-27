@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Sobey--云平台服务-审核</title>
+<!-- Le styles -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+     <script src="js/html5.js"></script>
+    <![endif]-->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+
+		<!-- Header -->
+		<div class="page-header">
+			<h1>
+				Sobey<small>--云平台服务</small>
+			</h1>
+		</div>
+
+		<!-- Menu -->
+		<div id="menu">
+			<ul class="nav nav-tabs">
+				<li id="home-tab"><a href="./Home.html">主页</a></li>
+				<li id="support-tab"><a href="./SupportList.html">服务申请</a></li>
+				<li id="feature-tab"><a href="./FeatureList.html">服务变更</a></li>
+				<li id="bug-tab"><a href="./BugList.html">故障申报</a></li>
+				<li id="audit-tab"><a href="./AuditList.html">审核</a></li>
+				<li><a href="./Login.html">退出登录</a></li>
+			</ul>
+		</div>
+
+
+
+		<div class="row">
+
+			<div class="span8 offset2">
+
+				<div class="page-header">
+					<h1>审核详情</h1>
+				</div>
+
+				<div class="page-header">
+					<h3>申请信息</h3>
+				</div>
+
+				<table class="table table-bordered table-striped">
+					<colgroup>
+						<col class="span2">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>Tag</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>申请人</td>
+							<td>刘凯</td>
+						</tr>
+						<tr>
+							<td>申请时间</td>
+							<td>2012/6/8</td>
+						</tr>
+						<tr>
+							<td>服务申请主题</td>
+							<td>申请一个服务器用于web业务</td>
+						</tr>
+						<tr>
+							<td>操作系统</td>
+							<td>CentOs5.5 server &mdash; 64 Bit</td>
+						</tr>
+						<tr>
+							<td>资源类型</td>
+							<td>测试/演示资源</td>
+						</tr>
+						<tr>
+							<td>计算机资源</td>
+							<td><code>服务器类型:</code>Small &mdash; CPU[单核] Memory[1GB]
+								Disk[20GB].&nbsp; <code> 数量:</code>2个</td>
+						</tr>
+						<tr>
+							<td>存储资源</td>
+							<td><code>存储类型:</code>数据存储.&nbsp; <code>容量空间:</code>200G.&nbsp;
+								<code>吞吐量:</code>50 Mbps以内.&nbsp; <code>IOPS:</code>100</td>
+						</tr>
+						<tr>
+							<td>存储资源</td>
+							<td><code>存储类型:</code>业务存储.&nbsp; <code>容量空间:</code>200G.&nbsp;
+								<code>吞吐量:</code>50 Mbps以内.&nbsp; <code>IOPS:</code>100</td>
+						</tr>
+						<tr>
+							<td>接入服务</td>
+							<td><code>账号:</code>vpnAccout&nbsp; <code>使用人:</code>Vpner.&nbsp;
+								<code>需要访问主机:</code>127.0.0.1&nbsp; <code>接入方式:</code>VPN</td>
+						</tr>
+						<tr>
+							<td>公网IP申请</td>
+							<td><code>接入链路:</code>电信CTC &nbsp; <code>接入速率:</code>100M
+								&nbsp;</td>
+						</tr>
+						<tr>
+							<td>开放端口</td>
+							<td>telnet-23, &nbsp; http-80 , &nbsp; www-8080 &nbsp;</td>
+						</tr>
+						<tr>
+							<td>域名解析</td>
+							<td><code>解析类型:</code>NS &nbsp; <code>解析完整域名:</code>www.test.com
+								&nbsp; <code>目标IP地址:</code>198.168.5.2 &nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="page-header">
+					<h3>审核决定</h3>
+				</div>
+				<table class="table">
+					<colgroup>
+						<col class="span2">
+						<col class="span5">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>审核人</th>
+							<th>审核意见</th>
+							<th>审核时间</th>
+							<th>审核决定</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>审核人员1</td>
+							<td>这个申请很不错.</td>
+							<td>2012/6/24</td>
+							<td><span class="label label-success">通过</span></td>
+						</tr>
+						<tr>
+							<td>审核人员2</td>
+							<td>这个申请很重要</td>
+							<td>2012/6/24</td>
+							<td><span class="label label-success">通过</span></td>
+						</tr>
+						<tr>
+							<td>审核人员3</td>
+							<td>这个申请要考虑下</td>
+							<td>2012/6/24</td>
+							<td><span class="label label-important">不通过</span></td>
+						</tr>
+						<tr>
+							<td>审核人员4</td>
+							<td>这个申请一定要通过的!</td>
+							<td>2012/6/24</td>
+							<td><span class="label label-success">通过</span></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				<button class="btn btn-large" onclick="javascript :history.back(-1)">返回</button>
+			</div>
+		</div>
+
+
+		<!-- Footer -->
+
+		<footer class="footer">
+		<div class="row show-grid">
+			<div class="span4">Copyright &copy; 2005-2012</div>
+			<div class="span4 offset4">
+				<a href="./Home.html" class="pull-right">返回首页</a>
+			</div>
+		</div>
+		</footer>
+
+	</div>
+
+
+
+</body>
+</html>

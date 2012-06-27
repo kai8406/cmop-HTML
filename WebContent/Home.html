@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Sobey--云平台服务-首页</title>
+<!-- Le styles -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+     <script src="js/html5.js"></script>
+    <![endif]-->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		//聚焦第一个输入框
+		$("#home-tab").addClass("active");
+	});
+</script>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<!-- Header -->
+		<div class="page-header">
+			<h1>
+				Sobey<small>--云平台服务</small>
+			</h1>
+		</div>
+
+		<!-- Menu -->
+		<div id="menu">
+			<ul class="nav nav-tabs">
+				<li id="home-tab"><a href="./Home.html">主页</a></li>
+				<li id="support-tab"><a href="./SupportList.html">服务申请</a></li>
+				<li id="feature-tab"><a href="./FeatureList.html">服务变更</a></li>
+				<li id="bug-tab"><a href="./BugList.html">故障申报</a></li>
+				<li id="audit-tab"><a href="./AuditList.html">审核</a></li>
+				<li><a href="./Login.html">退出登录</a></li>
+			</ul>
+		</div>
+
+		<div class="row">
+
+			<!-- Support -->
+			<div class="span3">
+				<h2>服务申请</h2>
+				<!-- 
+				<p>
+					您的服务申请共有 <span class="label label-inverse">79</span> 条.
+				</p>
+				 -->
+				<p>
+				<ul>
+					<li>点击主页上 <span class="label label-info">服务申请</span>
+						标签可以进入服务申请列表.
+					</li>
+					<li>可以根据自身的需求情况创建一个服务申请.</li>
+					<li>点击 <span class="label">查看</span>,可查看指定服务申请的详细信息.
+					</li>
+					<li>可通过页面的 <span class="label label-important">待审核</span>,<span
+						class="label label-warning">审核中</span>, <span
+						class="label label-success">已审核</span> 等申请流程状态,判断服务申请流程的情况.
+					</li>
+					<li>点击申请流程的状态标签,可查看具体的审核进度.</li>
+					<li>可根据条件进行查询.</li>
+				</ul>
+				</p>
+				<p>
+					<a href="./SupportList.html" class="btn">更多 »</a>
+				</p>
+			</div>
+
+
+			<!-- Feature -->
+			<div class="span3">
+				<h2>服务变更</h2>
+				<!-- 
+				<p>
+					您的服务变更共有 <span class="label label-inverse">2</span> 条.
+				</p>
+				 -->
+				<p>
+				<ul>
+					<li>点击主页上 <span class="label label-info">服务变更</span>
+						标签可以进入服务变更列表.
+					</li>
+					<li>可以根据自身的需求在服务申请列表对指定的服务申请进行服务变更.</li>
+					<li>点击 <span class="label">查看</span>,可查看指定服务变更的详细信息.
+					</li>
+					<li>可通过页面的 <span class="label label-important">待审核</span>,<span
+						class="label label-warning">审核中</span>, <span
+						class="label label-success">已审核</span> 等服务变更流程的状态,判断服务的情况.
+					</li>
+					<li>点击变更流程的状态,可查看具体的审核进度.</li>
+					<li>可根据条件进行查询.</li>
+				</ul>
+				</p>
+				<p>
+					<a href="./FeatureList.html" class="btn">更多 »</a>
+				</p>
+			</div>
+
+			<!-- Bug -->
+			<div class="span3">
+				<h2>故障申报</h2>
+				<p>
+				<ul>
+					<li>点击主页上 <span class="label label-info">故障申报</span>
+						标签可以进入故障申报列表.
+					</li>
+					<li>可以对发现的故障进行申报.系统管理员会第一时间进行处理.</li>
+					<li>点击 <span class="label">查看</span>,可查看指定故障申报的详细信息.
+					</li>
+					<li>可根据条件进行查询.</li>
+				</ul>
+				</p>
+
+				<p>
+					<a href="./BugList.html" class="btn">更多 »</a>
+				</p>
+			</div>
+
+			<!-- Audit -->
+			<div class="span3">
+				<h2>服务审核</h2>
+				<p>
+					您的需要审核的申请有 <span class="label label-inverse">2</span> 条.
+				</p>
+				<p>
+				<ul>
+					<li>点击主页上 <span class="label label-info">审核</span>
+						标签可以进入故障申报列表.
+					</li>
+					<li>点击 <span class="label">审核</span>,可进入指定服务申请或服务变更的审核页面中.
+					</li>
+					<li>填写审核意见,再选择是否审核通过.
+						<ul>
+							<li>审核通过,服务申请或服务变更进入下一步审核流程,直到审核通过.</li>
+							<li>审核未通过,将终止审核流程.</li>
+						</ul>
+					</li>
+					<li>可根据条件进行查询.</li>
+				</ul>
+				</p>
+				<p>
+					<a href="./AuditList.html" class="btn">更多 »</a>
+				</p>
+
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<section>
+		<div class="page-header"></div>
+		<footer class="footer">
+		<div class="row show-grid">
+			<div class="span4">Copyright &copy; 2005-2012</div>
+			<div class="span4 offset4">
+				<a href="./Home.html" class="pull-right">返回首页</a>
+			</div>
+		</div>
+		</footer> </section>
+
+	</div>
+
+</body>
+</html>

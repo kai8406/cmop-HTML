@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Sobey--云平台服务-注册</title>
+<!-- Le styles -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+     <script src="js/html5.js"></script>
+    <![endif]-->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		//聚焦第一个输入框
+		$("#email").focus();
+	});
+</script>
+
+</head>
+<body>
+
+	<div class="container">
+
+		<!-- Header -->
+		<div class="page-header">
+			<h1>
+				Sobey<small>--云平台服务</small>
+			</h1>
+		</div>
+
+
+		<div class="row">
+			<div class="span6 offset3">
+				<form action="./Home.html">
+
+					<div class="control-group">
+						<label for="focusedInput" class="control-label">公司邮箱</label>
+						<div class="controls">
+							<input type="text" id="email" placeholder="Email" class="">
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label for="focusedInput" class="control-label">密码</label>
+						<div class="controls">
+							<input type="password" id="password" placeholder="Password"
+								class="">
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<div class="controls">
+							<input type="checkbox" />记住我
+						</div>
+					</div>
+ 
+
+					<div class="form-actions">
+						<button class="btn btn-primary" type="submit">保存修改</button>
+						<a class="btn" href="./Login.html">取消</a>
+					</div>
+
+
+				</form>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<section>
+		<div class="page-header"></div>
+		<footer class="footer">
+		<div class="row show-grid">
+			<div class="span4">Copyright &copy; 2005-2012</div>
+			<div class="span4 offset4">
+				<a href="./Home.html" class="pull-right">返回首页</a>
+			</div>
+		</div>
+		</footer> </section>
+
+	</div>
+
+</body>
+</html>
