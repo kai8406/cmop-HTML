@@ -85,11 +85,11 @@ function displayInputParameter(){
 	//服务器类型
 	serverType = $("input[name='serverType']:checked").val();
 	if(serverType == 1){
-		tserverTypeName = "Small &mdash; CPU[单核] Memory[1GB] Disk[20GB]";
+		serverTypeName = "Small &mdash; CPU[单核] Memory[1GB] Disk[20GB]";
 	}else if(serverType ==2){
-		tserverTypeName = "Middle &mdash; CPU[双核] Memory[2GB] Disk[20GB]";
+		serverTypeName = "Middle &mdash; CPU[双核] Memory[2GB] Disk[20GB]";
 	}else{
-		tserverTypeName = "Large &mdash; CPU[四核] Memory[4GB] Disk[20GB]";
+		serverTypeName = "Large &mdash; CPU[四核] Memory[4GB] Disk[20GB]";
 	}
 	
 	//实例数量
@@ -116,10 +116,85 @@ function displayInputParameter(){
 	
 	$("#td_osType").html(osName+" &mdash;"+osBit);
 	
-	$("#td_serverType").html("<code>服务器类型:</code>"+tserverTypeName+"<code>虚拟机数量:</code>"+instancesNum);
+	$("#td_serverType").html("<code>服务器类型:</code>"+serverTypeName+"<code>虚拟机数量:</code>"+instancesNum);
 	
 	/*网络资源*/
-	
+	 typeStr ="";
+     $("input[name='networkType']:checked").each(function(){
+   	  if($(this).val()==1){
+   		  typeStr  += ",电信CTC";
+   	  }else{
+   		  typeStr += ",联通CNC";
+   	  }
+     });
+ 	  networkType = typeStr.substring(1, typeStr.length); //接入链路
+     
+     //接入速率
+     band = $("input[name='networkBand']:checked").val();
+     
+   
+     portStr ="";
+     $("input[name='networkPort']:checked").each(function(){
+   	  if($(this).val()==1){
+   		  portStr  += ",FTP-21";
+   	  }else if($(this).val()==2){
+   		  portStr += ",Telnet-23";
+   	  }else if($(this).val()==3){
+   		  portStr += ",DNS-32 ";
+   	  }else if($(this).val()==4){
+   		  portStr += ",Http-80 ";
+   	  }else if($(this).val()==5){
+   		  portStr += ",https-443 ";
+   	  }else{
+   		  portStr += ",www-8080 ";
+   	  }
+     });
+     networkPort = portStr.substring(1, portStr.length);  //开放端口
+     
+     //公网IP
+     networkOutIp = $("#networkOutIp").val();
+     
+     //解析类型
+      first = $("input[name='analyseTypeFirst']:checked").val();
+     if(first==1){
+   	  analyseTypeFirst = "NS";
+     }else if(first ==2){
+   	  analyseTypeFirst = "MX";
+   	  
+     }else if(first == 3){
+   	  analyseTypeFirst = "A";
+     }else{
+   	  analyseTypeFirst ="CHAME";
+     }
+     
+      sec = $("input[name='analyseTypeSec']:checked").val();
+      if(sec==1){
+   	  analyseTypeSec = "NS";
+     }else if(sec ==2){
+   	  analyseTypeSec = "MX";
+   	  
+     }else if(sec == 3){
+   	  analyseTypeSec = "A";
+     }else{
+   	  analyseTypeSec = "CHAME";
+     }
+     
+     //解析完整域名
+     domainFirst = $("#domainFirst").val();
+     domainSec = $("#domainSec").val();
+     
+     //目标IP地址
+     ipFirst = $("#ipFirst").val();
+     ipSec = $("#ipSec").val();
+     
+     
+     $("#td_network").html("<code>接入链路:</code>"+networkType+"<code>接入速率:</code>"+band);
+     $("#td_networkPort").html(networkPort);
+     $("#td_networkOutIp").html(networkOutIp);
+     
+     $("#td_netDomainFirst").html("<code>解析类型:</code>"+analyseTypeFirst+"<code>解析完整域名:</code>"+domainFirst+"<code>目标IP地址:</code>"+ipFirst);
+     $("#td_netDomainSec").html("<code>解析类型:</code>"+analyseTypeSec+"<code>解析完整域名:</code>"+domainSec+"<code>目标IP地址:</code>"+ipSec);
+     
 }
 
 
