@@ -144,7 +144,7 @@ function displayInputParameter(){
    	  }else if($(this).val()==4){
    		  portStr += ",Http-80 ";
    	  }else if($(this).val()==5){
-   		  portStr += ",https-443 ";
+   		  portStr += ",Https-443 ";
    	  }else{
    		  portStr += ",www-8080 ";
    	  }
@@ -188,7 +188,7 @@ function displayInputParameter(){
      ipSec = $("#ipSec").val();
      
      
-     $("#td_network").html("<code>接入链路:</code>"+networkType+"<code>接入速率:</code>"+band);
+     $("#td_network").html("<code>接入链路:</code>"+networkType+"<code>接入速率:</code>"+band+"M");
      $("#td_networkPort").html(networkPort);
      $("#td_networkOutIp").html(networkOutIp);
      
