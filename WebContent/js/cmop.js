@@ -32,6 +32,7 @@ function displayInputParameter(){
 	
 }
 
+
 /**
  * 申请页面中,点击"下一步"和"后退"时切换Tab
  * ul的ID	:		myTab
@@ -56,6 +57,8 @@ function switchTab(){
 	
 	var tabStep = $("#myTab li a");
 	tabStep.click(function(){
+		
+		$('#myTab li:eq('+ (tabStep.index(this) + 1) +') a').tab('show');
 		displayInputParameter();
 	 });
 	
