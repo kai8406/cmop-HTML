@@ -15,7 +15,7 @@ function displayInputParameter(){
 	$("#td_usage").html($("#usage").val());
 	
 	//资源类型
-	resourceType = $("input[name='resourceType'][checked]").val();
+	resourceType = $("input[name='resourceType']:checked").val();
 	if(resourceType === 1){
 		$("#td_resourceType").html("生产资源");
 	}else if(resourceType ===2){
@@ -29,6 +29,54 @@ function displayInputParameter(){
 	user = $("#accountUser").val();
 	visitHost = $("#visitHost").val();
 	$("#td_inVpnItem").html("<code>账号:</code>"+account+"<code>使用人:</code>"+user+"<code>需要访问主机:</code>"+visitHost);
+	
+	
+	//存储资源:数据存储
+	if($('#dataStorageType').is(":checked")){
+		
+		$("#tr_dataStorage").show();
+		
+		//容量空间
+		space = $("input[name='dataSorageSpace']:checked").val();
+		
+		//Throughput（吞吐量）
+	 	if($("input[name='dataStorageThroughput']:checked").val() === 1){
+	 		throughput = "50 Mbps以内"; 
+	 	}else{
+	 		throughput = "50 Mbps以上"; 
+	 	}
+		
+		//IOPS（每秒进行读写（I/O）操作的次数）
+		iops = $("#dataStorageIops").val();
+		
+	 	$("#td_dataStorage").html("<code>存储类型:</code>数据存储<code>容量空间:</code>"+space+"G<code>吞吐量:</code>"+throughput+"<code>IOPS:</code>"+iops);
+	 	
+	}else{
+		$("#tr_dataStorage").hide();
+	}
+	
+	//存储资源:业务存储
+	if($('#businessStorageType').is(":checked")){
+		
+		$("#tr_businessStorage").show();
+		
+		//容量空间
+		space = $("input[name='businessStorageSpace']:checked").val();
+		
+		//Throughput（吞吐量）
+	 	if($("input[name='businessStorageThroughput']:checked").val() === 1){
+	 		throughput = "50 Mbps以内"; 
+	 	}else{
+	 		throughput = "50 Mbps以上"; 
+	 	}
+		
+		//IOPS（每秒进行读写（I/O）操作的次数）
+		iops = $("#businessStorageIops").val();
+		
+	 	$("#td_businessStorage").html("<code>存储类型:</code>业务存储<code>容量空间:</code>"+space+"G<code>吞吐量:</code>"+throughput+"<code>IOPS:</code>"+iops);
+	}else{
+		$("#tr_businessStorage").hide();
+	}
 	
 }
 
@@ -57,8 +105,6 @@ function switchTab(){
 	
 	var tabStep = $("#myTab li a");
 	tabStep.click(function(){
-		
-		$('#myTab li:eq('+ (tabStep.index(this) + 1) +') a').tab('show');
 		displayInputParameter();
 	 });
 	
