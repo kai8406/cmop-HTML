@@ -3,30 +3,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sobey--云平台服务-接入服务申请</title>
+
 <!-- Le styles -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="jquery-ui/css/overcast/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
      <script src="js/html5.js"></script>
     <![endif]-->
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/cmop.js"></script>
+<script src="jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
 <script>
 	$(document).ready(function() {
 
 		//聚焦第一个输入框
 		$("#profile-tab").addClass("active");
+		
+		//起始时间
+		$("#serviceStart").datepicker();
+		$("#serviceEnd").datepicker();
 
 		//下一步按钮
 		$("#next_1").click(function() {
 			$('#myTab li:eq(1) a').tab('show'); // Select 2 tab (0-indexed)
+			
+			displayParameter();
+			
 		});
 
 		$("#next_2").click(function() {
+			
 			$('#myTab li:eq(2) a').tab('show');
+			
+			displayParameter();
+			
+			
 		});
 		$("#next_3").click(function() {
 			$('#myTab li:eq(3) a').tab('show');
@@ -115,34 +132,36 @@
 								<div class="control-group">
 									<label class="control-label">接入服务申请主题</label>
 									<div class="controls">
-										<input type="text" value="" class="input-large">
+										<input type="text" id="title" name="title" value="" class="input-large" />
 									</div>
 								</div>
 								
 								<div class="control-group">
 									<label class="control-label">申请起始时间</label>
 									<div class="controls">
-										<input type="text" value="" class="input-medium">&mdash;
-										<input type="text" value="" class="input-medium">
+										<input type="text" id="serviceStart" name="serviceStart" value="" class="input-medium" />&mdash;
+										<input type="text" id="serviceEnd" name="serviceEnd" value="" class="input-medium" />
 									</div>
 								</div>
 
 								<div class="control-group">
 									<label class="control-label">申请用途</label>
 									<div class="controls">
-										<textarea rows="3" class="input-xlarge"></textarea>
+										<textarea rows="3" id="usage" name="usage" class="input-xlarge"></textarea>
 									</div>
 								</div>
 
 								<div class="control-group">
 									<label class="control-label">资源类型</label>
 									<div class="controls">
-										<label class="radio"> <input type="radio" checked=""
-											value="" name="resourcesTypeRadios">生产资源
-										</label> <label class="radio"> <input type="radio" value=""
-											name="resourcesTypeRadios"> 测试/演示资源
-										</label> <label class="radio"> <input type="radio" value=""
-											name="resourcesTypeRadios"> 公测资源
+										<label class="radio"> 
+											<input type="radio"  value="生产资源" name="resourceType" />生产资源
+										</label> 
+										<label class="radio"> 
+											<input type="radio" value=" 测试/演示资源"	name="resourceType" /> 测试/演示资源
+										</label> 
+										<label class="radio"> 
+											<input type="radio" value="公测资源" name="resourceType" /> 公测资源
 										</label>
 									</div>
 								</div>
@@ -161,19 +180,19 @@
 								<div class="control-group">
 									<label class="control-label">账号</label>
 									<div class="controls">
-										<input type="text" value="" class="input-large">
+										<input type="text" id="account" name="account" value="" class="input-large" />
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">使用人</label>
 									<div class="controls">
-										<input type="text" value="" class="input-large">
+										<input type="text" id="accountUser" name="accountUser" value="" class="input-large" />
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label">需要访问主机</label>
 									<div class="controls">
-										<input type="text" value="" class="input-large">
+										<input type="text" id="visitHost" name="visitHost" value="" class="input-large" />
 									</div>
 								</div>
 
@@ -199,29 +218,27 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>接入服务申请主题</td>
-											<td>申请一个服务器用于web业务</td>
+											<td>主题</td>
+											<td id="td_title"></td>
 										</tr>
 										<tr>
 											<td>申请起始时间</td>
-											<td>2012/6/6-2012/6/19</td>
+											<td id="td_time"></td>
 										</tr>
 										<tr>
 											<td>申请用途</td>
-											<td>用于Sobey cmop业务</td>
+											<td id="td_usage"></td>
 										</tr>
 										<tr>
 											<td>资源类型</td>
-											<td>测试/演示资源</td>
+											<td id="td_resourceType"></td>
 										</tr>
 										<tr>
 											<td>接入服务</td>
-											<td><code>账号:</code>vpnAccout&nbsp; <code>使用人:</code>Vpner.&nbsp;
-												<code>需要访问主机:</code>127.0.0.1&nbsp; <code>接入方式:</code>VPN</td>
+											<td id="td_inVpnItem"></td>
 										</tr>
 									</tbody>
 								</table>
-
 
 							</fieldset>
 
