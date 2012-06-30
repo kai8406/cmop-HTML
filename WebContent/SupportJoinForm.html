@@ -20,6 +20,7 @@
 <script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
 <script>
+
 	$(document).ready(function() {
 
 		//聚焦第一个输入框
@@ -28,55 +29,8 @@
 		//起始时间
 		$("#serviceStart").datepicker();
 		$("#serviceEnd").datepicker();
-
-		//下一步按钮
-		$("#next_1").click(function() {
-			$('#myTab li:eq(1) a').tab('show'); // Select 2 tab (0-indexed)
-			
-			displayParameter();
-			
-		});
-
-		$("#next_2").click(function() {
-			
-			$('#myTab li:eq(2) a').tab('show');
-			
-			displayParameter();
-			
-			
-		});
-		$("#next_3").click(function() {
-			$('#myTab li:eq(3) a').tab('show');
-		});
-		$("#next_4").click(function() {
-			$('#myTab li:eq(4) a').tab('show');
-		});
-		$("#next_5").click(function() {
-			$('#myTab li:eq(5) a').tab('show');
-		});
-		$("#next_6").click(function() {
-			$('#myTab li:eq(6) a').tab('show');
-		});
-
-		//返回按钮
-		$("#back_1").click(function() {
-			$('#myTab li:eq(0) a').tab('show'); // Select 1 tab (0-indexed)
-		});
-		$("#back_2").click(function() {
-			$('#myTab li:eq(1) a').tab('show');
-		});
-		$("#back_3").click(function() {
-			$('#myTab li:eq(2) a').tab('show');
-		});
-		$("#back_4").click(function() {
-			$('#myTab li:eq(3) a').tab('show');
-		});
-		$("#back_5").click(function() {
-			$('#myTab li:eq(4) a').tab('show');
-		});
-		$("#back_6").click(function() {
-			$('#myTab li:eq(5) a').tab('show');
-		});
+		
+		switchTab();
 
 	});
 </script>
@@ -167,7 +121,7 @@
 								</div>
 							</fieldset>
 							<div class="form-actions">
-								<a id="next_1" class="btn btn-primary">下一步</a>
+								<a id="nextStep" class="btn btn-primary">下一步</a>
 							</div>
 						</div>
 
@@ -198,7 +152,7 @@
 
 							</fieldset>
 							<div class="form-actions">
-								<a id="back_1" class="btn">返回</a> <a id="next_2"
+								<a id="backStep" class="btn">返回</a> <a id="nextStep"
 									class="btn btn-primary">下一步</a>
 							</div>
 						</div>
@@ -243,7 +197,7 @@
 							</fieldset>
 
 							<div class="form-actions ">
-								<a id="back_2" class="btn ">返回</a>
+								<a id="backStep" class="btn ">返回</a>
 								<button class="btn btn-success">保存修改</button>
 							</div>
 						</div>
