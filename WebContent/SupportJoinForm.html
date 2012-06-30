@@ -20,17 +20,14 @@
 <script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
 <script>
-
 	$(document).ready(function() {
-
-		//聚焦第一个输入框
-		$("#profile-tab").addClass("active");
+		
+		switchTab();
 		
 		//起始时间
 		$("#serviceStart").datepicker();
 		$("#serviceEnd").datepicker();
 		
-		switchTab();
 
 	});
 </script>
@@ -66,15 +63,15 @@
 			<div id="Guide" class="span2">
 				<div class="tabbable tabs-left">
 					<ul class="nav nav-tabs" id="myTab">
-						<li id="profile-tab"><a href="#profile1" data-toggle="tab">1.接入服务申请
-						</a></li>
+						<li class="active"><a href="#profile1" data-toggle="tab">1.接入服务申请</a></li>
 						<li><a href="#profile2" data-toggle="tab">2.接入服务</a></li>
 						<li><a href="#profile3" data-toggle="tab">3.提交</a></li>
 					</ul>
 				</div>
 			</div>
+			
 			<div id="main" class="span10">
-
+			
 				<form action="./SupportList.html">
 
 					<div class="tab-content">
@@ -120,6 +117,7 @@
 									</div>
 								</div>
 							</fieldset>
+							
 							<div class="form-actions">
 								<a id="nextStep" class="btn btn-primary">下一步</a>
 							</div>
@@ -127,7 +125,6 @@
 
 						<!-- 第2步 -->
 						<div class="tab-pane fade span6 offset1" id="profile2">
-
 							<fieldset>
 								<legend>接入服务</legend>
 
@@ -137,12 +134,14 @@
 										<input type="text" id="account" name="account" value="" class="input-large" />
 									</div>
 								</div>
+								
 								<div class="control-group">
 									<label class="control-label">使用人</label>
 									<div class="controls">
 										<input type="text" id="accountUser" name="accountUser" value="" class="input-large" />
 									</div>
 								</div>
+								
 								<div class="control-group">
 									<label class="control-label">需要访问主机</label>
 									<div class="controls">
@@ -151,6 +150,7 @@
 								</div>
 
 							</fieldset>
+							
 							<div class="form-actions">
 								<a id="backStep" class="btn">返回</a> <a id="nextStep"
 									class="btn btn-primary">下一步</a>
@@ -159,11 +159,14 @@
 
 
 						<!-- 第3步 -->
-						<div class="tab-pane fade span7 offset1 " id="profile3">
+						<div class="tab-pane fade span8 offset1" id="profile3">
 							<fieldset>
 								<legend>接入服务申请详情</legend>
-
 								<table class="table table-bordered table-striped">
+									<colgroup>
+										<col class="span2">
+										<col class="span6">
+									</colgroup>
 									<thead>
 										<tr>
 											<th>Tag</th>
@@ -172,11 +175,11 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>主题</td>
+											<td>申请主题</td>
 											<td id="td_title"></td>
 										</tr>
 										<tr>
-											<td>申请起始时间</td>
+											<td>起始时间</td>
 											<td id="td_time"></td>
 										</tr>
 										<tr>
@@ -193,13 +196,13 @@
 										</tr>
 									</tbody>
 								</table>
-
 							</fieldset>
 
-							<div class="form-actions ">
+							<div class="form-actions">
 								<a id="backStep" class="btn ">返回</a>
 								<button class="btn btn-success">保存修改</button>
 							</div>
+							
 						</div>
 
 					</div>
