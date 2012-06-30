@@ -6,60 +6,26 @@
 <!-- Le styles -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="jquery-ui/css/overcast/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
      <script src="js/html5.js"></script>
     <![endif]-->
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/cmop.js"></script>
+<script src="jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
 <script>
 	$(document).ready(function() {
 
-		//聚焦第一个输入框
-		$("#profile-tab").addClass("active");
-
-		//下一步按钮
-		$("#next_1").click(function() {
-			$('#myTab li:eq(1) a').tab('show'); // Select 2 tab (0-indexed)
-		});
-
-		$("#next_2").click(function() {
-			$('#myTab li:eq(2) a').tab('show');
-		});
-		$("#next_3").click(function() {
-			$('#myTab li:eq(3) a').tab('show');
-		});
-		$("#next_4").click(function() {
-			$('#myTab li:eq(4) a').tab('show');
-		});
-		$("#next_5").click(function() {
-			$('#myTab li:eq(5) a').tab('show');
-		});
-		$("#next_6").click(function() {
-			$('#myTab li:eq(6) a').tab('show');
-		});
-
-		//返回按钮
-		$("#back_1").click(function() {
-			$('#myTab li:eq(0) a').tab('show'); // Select 1 tab (0-indexed)
-		});
-		$("#back_2").click(function() {
-			$('#myTab li:eq(1) a').tab('show');
-		});
-		$("#back_3").click(function() {
-			$('#myTab li:eq(2) a').tab('show');
-		});
-		$("#back_4").click(function() {
-			$('#myTab li:eq(3) a').tab('show');
-		});
-		$("#back_5").click(function() {
-			$('#myTab li:eq(4) a').tab('show');
-		});
-		$("#back_6").click(function() {
-			$('#myTab li:eq(5) a').tab('show');
-		});
+		switchTab();
+		
+		//起始时间
+		$("#serviceStart").datepicker();
+		$("#serviceEnd").datepicker();
 
 	});
 </script>
@@ -75,7 +41,6 @@
 				Sobey<small>--云平台服务</small>
 			</h1>
 		</div>
-
 
 		<!-- Menu -->
 		<div id="menu">
@@ -95,8 +60,7 @@
 			<div id="Guide" class="span2">
 				<div class="tabbable tabs-left">
 					<ul class="nav nav-tabs" id="myTab">
-						<li id="profile-tab"><a href="#profile1" data-toggle="tab">1.计算资源申请
-						</a></li>
+						<li class="active"><a href="#profile1" data-toggle="tab">1.计算资源申请</a></li>
 						<li><a href="#profile2" data-toggle="tab">2.计算资源</a></li>
 						<li><a href="#profile3" data-toggle="tab">3.提交</a></li>
 					</ul>
@@ -106,6 +70,8 @@
 			<div id="main" class="span10">
 
 				<form action="./SupportList.html">
+				<!-- 操作系统ID -->
+				<input type="hidden" id="osType" name="osType" value="" />
 
 					<div class="tab-content">
 
@@ -116,40 +82,43 @@
 								<div class="control-group">
 									<label class="control-label">计算资源申请主题</label>
 									<div class="controls">
-										<input type="text" value="" class="input-large">
+										<input type="text" id="title" name="title" value="" class="input-large" />
 									</div>
 								</div>
 								
 								<div class="control-group">
 									<label class="control-label">申请起始时间</label>
 									<div class="controls">
-										<input type="text" value="" class="input-medium">&mdash;
-										<input type="text" value="" class="input-medium">
+										<input type="text" id="serviceStart" name="serviceStart" value="" class="input-medium" />&mdash;
+										<input type="text" id="serviceEnd" name="serviceEnd" value="" class="input-medium" />
 									</div>
 								</div>
 
 								<div class="control-group">
 									<label class="control-label">申请用途</label>
 									<div class="controls">
-										<textarea rows="3" class="input-xlarge"></textarea>
+										<textarea rows="3" id="usage" name="usage" class="input-xlarge"></textarea>
 									</div>
 								</div>
 
 								<div class="control-group">
 									<label class="control-label">资源类型</label>
 									<div class="controls">
-										<label class="radio"> <input type="radio" checked=""
-											value="" name="resourcesTypeRadios">生产资源
-										</label> <label class="radio"> <input type="radio" value=""
-											name="resourcesTypeRadios"> 测试/演示资源
-										</label> <label class="radio"> <input type="radio" value=""
-											name="resourcesTypeRadios"> 公测资源
+										<label class="radio"> 
+											<input type="radio"  value="1" name="resourceType" />生产资源
+										</label> 
+										<label class="radio"> 
+											<input type="radio" value=" 2"	name="resourceType" /> 测试/演示资源
+										</label> 
+										<label class="radio"> 
+											<input type="radio" value="3" name="resourceType" /> 公测资源
 										</label>
 									</div>
 								</div>
 							</fieldset>
+							
 							<div class="form-actions">
-								<a id="next_1" class="btn btn-primary">下一步</a>
+								<a id="nextStep" class="btn btn-primary">下一步</a>
 							</div>
 						</div>
 
@@ -161,18 +130,24 @@
 								<div class="control-group">
 									<label for="focusedInput" class="control-label">服务器类型</label>
 									<div class="controls">
-										<select>
-											<option>Small -- CPU[单核] Memory[1GB] Disk[20GB]</option>
-											<option>Middle -- CPU[双核] Memory[2GB] Disk[20GB]</option>
-											<option>Large -- CPU[四核] Memory[4GB] Disk[20GB]</option>
-										</select>
+										<label class="radio"> 
+											<input type="radio"  value="1" name="serverType" />Small &mdash; CPU[单核] Memory[1GB] Disk[20GB]
+										</label> 
+										<label class="radio"> 
+											<input type="radio" value=" 2"	name="serverType" />Middle &mdash; CPU[双核] Memory[2GB] Disk[20GB]
+										</label> 
+										<label class="radio"> 
+											<input type="radio" value="3" name="serverType" />Large &mdash; CPU[四核] Memory[4GB] Disk[20GB]
+										</label>
 									</div>
 								</div>
-
+								
+								<div class="page-header"></div>
+								
 								<div class="control-group">
 									<label for="focusedInput" class="control-label">实例数量</label>
 									<div class="controls">
-										<input type="text" value="" class="input-medium">
+										<input type="text"  id="instancesNum" name="instancesNum" value="" class="input-medium" />
 									</div>
 								</div>
 							</fieldset>
@@ -183,21 +158,20 @@
 									<div class="controls">
 										<div class="row show-grid">
 											<div class="span1">
-												<img alt="" src="./img/windows_logo.png">
+												<img alt="windows OS" src="./img/windows_logo.png" />
 											</div>
 											<div class="span4">
-												<h3>Windwos2003R2</h3>
+												<input type="hidden" id="osId" value="1" />
+												<h3 id="osName">Windwos2003R2</h3>
 												<p>Nullam quis risus eget urna mollis ornare vel eu leo.
-													Cum sociis natoque penatibus et magnis dis parturient
-													montes, nascetur ridiculus mus. Nullam id dolor id nibh
 													ultricies vehicula.</p>
 											</div>
 											<div class="span1">
-												<label class="radio"> <input type="radio"
-													checked="checked" value="" name="optionsRadios"> 32
-													Bit
-												</label> <label class="radio"> <input type="radio" value=""
-													name="optionsRadios"> 64 Bit
+												<label class="radio">
+													<input type="radio"  value="1" name="osBit" /> 32 Bit
+												</label> 
+												<label class="radio"> 
+													<input type="radio" value="2" name="osBit" /> 64 Bit
 												</label>
 											</div>
 										</div>
@@ -208,20 +182,20 @@
 									<div class="controls">
 										<div class="row show-grid">
 											<div class="span1">
-												<img alt="" src="./img/windows_logo.png">
+												<img alt="windows OS" src="./img/windows_logo.png" />
 											</div>
 											<div class="span4">
-												<h3>Windwos2008R2</h3>
+												<input type="hidden" id="osId" value="2" />
+												<h3 id="osName">Windwos2008R2</h3>
 												<p>Nullam quis risus eget urna mollis ornare vel eu leo.
-													Cum sociis natoque penatibus et magnis dis parturient
-													montes, nascetur ridiculus mus. Nullam id dolor id nibh
 													ultricies vehicula.</p>
 											</div>
 											<div class="span1">
-												<label class="radio"> <input type="radio" value=""
-													name="optionsRadios"> 32 Bit
-												</label> <label class="radio"> <input type="radio" value=""
-													name="optionsRadios"> 64 Bit
+												<label class="radio">
+													<input type="radio"  value="1" name="osBit" /> 32 Bit
+												</label> 
+												<label class="radio"> 
+													<input type="radio" value="2" name="osBit" /> 64 Bit
 												</label>
 											</div>
 										</div>
@@ -232,20 +206,20 @@
 									<div class="controls">
 										<div class="row show-grid">
 											<div class="span1">
-												<img alt="" src="./img/centos-logo.png">
+												<img alt="centOS" src="./img/centos-logo.png" />
 											</div>
 											<div class="span4">
-												<h3>Centos6.3</h3>
+												<input type="hidden" id="osId" value="3" />
+												<h3 id="osName">Centos6.3</h3>
 												<p>Nullam quis risus eget urna mollis ornare vel eu leo.
-													Cum sociis natoque penatibus et magnis dis parturient
-													montes, nascetur ridiculus mus. Nullam id dolor id nibh
 													ultricies vehicula.</p>
 											</div>
 											<div class="span1">
-												<label class="radio"> <input type="radio" value=""
-													name="optionsRadios"> 32 Bit
-												</label> <label class="radio"> <input type="radio" value=""
-													name="optionsRadios"> 64 Bit
+												<label class="radio">
+													<input type="radio"  value="1" name="osBit" /> 32 Bit
+												</label> 
+												<label class="radio"> 
+													<input type="radio" value="2" name="osBit" /> 64 Bit
 												</label>
 											</div>
 										</div>
@@ -256,20 +230,20 @@
 									<div class="controls">
 										<div class="row show-grid">
 											<div class="span1">
-												<img alt="" src="./img/centos-logo.png">
+												<img alt="centOS" src="./img/centos-logo.png" />
 											</div>
 											<div class="span4">
-												<h3>Centos5.6</h3>
+												<input type="hidden" id="osId" value="4" />
+												<h3 id="osName" >Centos5.6</h3>
 												<p>Nullam quis risus eget urna mollis ornare vel eu leo.
-													Cum sociis natoque penatibus et magnis dis parturient
-													montes, nascetur ridiculus mus. Nullam id dolor id nibh
 													ultricies vehicula.</p>
 											</div>
 											<div class="span1">
-												<label class="radio"> <input type="radio" value=""
-													name="optionsRadios"> 32 Bit
-												</label> <label class="radio"> <input type="radio" value=""
-													name="optionsRadios"> 64 Bit
+												<label class="radio">
+													<input type="radio"  value="1" name="osBit" /> 32 Bit
+												</label> 
+												<label class="radio"> 
+													<input type="radio" value="2" name="osBit" /> 64 Bit
 												</label>
 											</div>
 										</div>
@@ -278,21 +252,22 @@
 
 							</fieldset>
 
-
 							<div class="form-actions">
-								<a id="back_1" class="btn">返回</a> <a id="next_2"
-									class="btn btn-primary">下一步</a>
+								<a id="backStep" class="btn">返回</a> 
+								<a id="nextStep" class="btn btn-primary">下一步</a>
 							</div>
 
 						</div>
 
-
 						<!-- 第3步 -->
-						<div class="tab-pane fade span7 offset1 " id="profile3">
+						<div class="tab-pane fade span8 offset1 " id="profile3">
 							<fieldset>
 								<legend>计算资源申请详情</legend>
-
 								<table class="table table-bordered table-striped">
+									<colgroup>
+										<col class="span2">
+										<col class="span6">
+									</colgroup>
 									<thead>
 										<tr>
 											<th>Tag</th>
@@ -301,29 +276,28 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>计算资源申请主题</td>
-											<td>申请一个服务器用于web业务</td>
+											<td>申请主题</td>
+											<td id="td_title"></td>
 										</tr>
 										<tr>
-											<td>申请起始时间</td>
-											<td>2012/6/6-2012/6/19</td>
+											<td>起始时间</td>
+											<td id="td_time"></td>
 										</tr>
 										<tr>
 											<td>申请用途</td>
-											<td>用于Sobey cmop业务</td>
+											<td id="td_usage"></td>
 										</tr>
 										<tr>
 											<td>资源类型</td>
-											<td>测试/演示资源</td>
+											<td id="td_resourceType"></td>
 										</tr>
 										<tr>
 											<td>操作系统</td>
-											<td>CentOs5.5 server &mdash; 64 Bit</td>
+											<td id="td_osType"></td>
 										</tr>
 										<tr>
 											<td>计算机资源</td>
-											<td><code>服务器类型:</code>Small -- CPU[单核] Memory[1GB]
-												Disk[20GB].&nbsp; <code>虚拟机数量:</code>2个</td>
+											<td id="td_serverType"></td>
 										</tr>
 
 									</tbody>
@@ -332,7 +306,7 @@
 							</fieldset>
 
 							<div class="form-actions ">
-								<a id="back_2" class="btn ">返回</a>
+								<a id="backStep" class="btn ">返回</a>
 								<button class="btn btn-success">保存修改</button>
 							</div>
 						</div>
@@ -342,8 +316,6 @@
 				</form>
 			</div>
 		</div>
-
-
 
 		<!-- Footer -->
 		<div class="page-header"></div>

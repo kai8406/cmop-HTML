@@ -5,6 +5,7 @@
  */
 function displayInputParameter(){
 	
+	
 	//标题
 	$("#td_title").html($("#title").val());
 	
@@ -16,21 +17,22 @@ function displayInputParameter(){
 	
 	//资源类型
 	resourceType = $("input[name='resourceType']:checked").val();
-	if(resourceType === 1){
+	if(resourceType == 1){
 		$("#td_resourceType").html("生产资源");
-	}else if(resourceType ===2){
+	}else if(resourceType ==2){
 		$("#td_resourceType").html("测试/演示资源 ");
 	}else{
 		$("#td_resourceType").html("公测资源 ");
 	}
 	
-	//接入服务
+	/*接入服务*/
 	account = $("#account").val() ;
 	user = $("#accountUser").val();
 	visitHost = $("#visitHost").val();
 	$("#td_inVpnItem").html("<code>账号:</code>"+account+"<code>使用人:</code>"+user+"<code>需要访问主机:</code>"+visitHost);
 	
 	
+	/*存储资源*/
 	//存储资源:数据存储
 	if($('#dataStorageType').is(":checked")){
 		
@@ -77,6 +79,46 @@ function displayInputParameter(){
 	}else{
 		$("#tr_businessStorage").hide();
 	}
+	
+	
+	/*计算资源*/
+	//服务器类型
+	serverType = $("input[name='serverType']:checked").val();
+	if(serverType == 1){
+		tserverTypeName = "Small &mdash; CPU[单核] Memory[1GB] Disk[20GB]";
+	}else if(serverType ==2){
+		tserverTypeName = "Middle &mdash; CPU[双核] Memory[2GB] Disk[20GB]";
+	}else{
+		tserverTypeName = "Large &mdash; CPU[四核] Memory[4GB] Disk[20GB]";
+	}
+	
+	//实例数量
+	instancesNum = $("#instancesNum").val();
+	
+	//操作系统
+	if($("input[name='osBit']:checked")){
+		
+		//获得radio的父节点,用于取得最近的serverId
+		osNode = $("input[name='osBit']:checked").parent().parent().parent();
+		
+		//给隐藏域osType赋上选中的操作类型ID用于提交到后台.
+	 	$("#osType").val(osNode.find("#osId").val());
+		
+		osName = osNode.find("#osName").text();//操作系统名
+	}
+	
+	//操作系统位数
+ 	if($("input[name='osBit']:checked").val() == 1){
+ 		osBit = "32 Bit"; 
+ 	}else{
+ 		osBit = "64 Bit"; 
+ 	}
+	
+	$("#td_osType").html(osName+" &mdash;"+osBit);
+	
+	$("#td_serverType").html("<code>服务器类型:</code>"+tserverTypeName+"<code>虚拟机数量:</code>"+instancesNum);
+	
+	/*网络资源*/
 	
 }
 
