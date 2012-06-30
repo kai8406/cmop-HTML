@@ -54,6 +54,21 @@ function switchTab(){
 		displayInputParameter();
 	 });
 	
-	
+	var tabStep = $("#myTab li a");
+	tabStep.click(function(){
+		displayInputParameter();
+	 });
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
