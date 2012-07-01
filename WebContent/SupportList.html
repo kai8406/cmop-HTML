@@ -16,7 +16,7 @@
 
 <script>
 	$(document).ready(function() {
-		//聚焦第一个输入框
+		//聚焦指定的Tab
 		$("#support-tab").addClass("active");
 	});
 </script>
@@ -97,24 +97,24 @@
 
 				</div>
 
-
 				<!-- Search -->
 				<form class="well form-search" action="./SupportList.html">
 
 					<div class="row-fluid show-grid">
 
 						<div class="span4">
-							<label class="control-label">主题:</label> <input type="text"
-								placeholder="服务申请主题" class="input-medium">
+							<label class="control-label">主题:</label> 
+							<input type="text" id="title" name="title"	placeholder="服务申请主题" class="input-medium">
 						</div>
 
 						<div class="span4">
 							<label class="control-label">审核状态:</label> <select
 								class="input-mini">
 								<option></option>
-								<option>待审核</option>
-								<option>审核中</option>
-								<option>已审核</option>
+								<option value="1">待审核</option>
+								<option value="2">审核中</option>
+								<option value="3">已审核</option>
+								<option value="4">已退回</option>
 							</select>
 						</div>
 						<div class="span2">
@@ -145,46 +145,51 @@
 							<td>liukai</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-important">待审核</span></td>
-							<td><a class="btn" href="./SupportDetail.html">查看</a> <a
-								class="btn btn-primary" href="./SupportForm.html">修改</a></td>
-
+							<td>
+								<a class="btn" href="./SupportDetail.html">查看</a> 
+								<a class="btn btn-primary" href="./SupportForm.html">修改</a>
+							</td>
 						</tr>
 						<tr>
 							<td>liukai</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-warning">审核中</span></td>
-							<td><a class="btn" href="./SupportDetail.html">查看</a> <a
-								class="btn btn-primary" href="./SupportForm.html">修改</a></td>
+							<td>
+								<a class="btn" href="./SupportDetail.html">查看</a>
+								<a class="btn btn-primary" href="./SupportForm.html">修改</a>
+							</td>
 						</tr>
 						<tr>
 							<td>liukai</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-success">已审核</span></td>
-							<td><a class="btn" href="./SupportDetail.html">查看</a> <a
-								class="btn btn-primary" href="./SupportDetail.html">修改</a> <a
-								class="btn btn-info" href="./SupportForm.html">变更</a></td>
+							<td>
+								<a class="btn" href="./SupportDetail.html">查看</a> 
+								<a class="btn btn-primary" href="./SupportDetail.html">修改</a> 
+								<a class="btn btn-info" href="./FeatureForm.html">变更</a>
+							</td>
 						</tr>
 						<tr>
 							<td>liukai</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-important">待审核</span></td>
-							<td><a class="btn" href="./SupportDetail.html">查看</a> <a
-								class="btn btn-primary" href="./SupportForm.html">修改</a></td>
-
+							<td>
+								<a class="btn" href="./SupportDetail.html">查看</a> 
+								<a class="btn btn-primary" href="./SupportForm.html">修改</a>
+							</td>
 						</tr>
 						<tr>
 							<td>liukai</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-important">待审核</span></td>
-							<td><a class="btn" href="./SupportDetail.html">查看</a> <a
-								class="btn btn-primary" href="./SupportForm.html">修改</a></td>
+							<td>
+								<a class="btn" href="./SupportDetail.html">查看</a> 
+								<a class="btn btn-primary" href="./SupportForm.html">修改</a>
+							</td>
 						</tr>
 
 					</tbody>
 				</table>
-
-
-
 
 				<!-- Pagination -->
 				<div class="pagination pull-right">
@@ -200,7 +205,6 @@
 			</div>
 
 		</div>
-
 
 
 		<!-- Footer -->

@@ -16,7 +16,7 @@
 
 <script>
 	$(document).ready(function() {
-		//聚焦第一个输入框
+		//聚焦指定的Tab
 		$("#feature-tab").addClass("active");
 	});
 </script>
@@ -52,22 +52,23 @@
 			<div class="row-fluid show-grid">
 
 				<div class="span3">
-					<label class="control-label">主题:</label> <input type="text"
-						placeholder="服务变更主题" class="input-medium">
+					<label class="control-label">主题:</label> 
+					<input type="text" id="title" name="title"	placeholder="服务变更主题" class="input-medium" />
 				</div>
 
 				<div class="span3">
-					<label class="control-label">创建日期:</label> <input type="text"
-						placeholder="创建日期" class="input-medium">
+					<label class="control-label">创建日期:</label> 
+					<input type="text"  laceholder="创建日期" class="input-medium" />
 				</div>
 
 				<div class="span3">
-					<label class="control-label">审核状态:</label> <select
-						class="input-medium">
+					<label class="control-label">审核状态:</label>
+					 <select class="input-mini">
 						<option></option>
-						<option>待审核</option>
-						<option>审核中</option>
-						<option>已审核</option>
+						<option value="1">待审核</option>
+						<option value="2">审核中</option>
+						<option value="3">已审核</option>
+						<option value="4">已退回</option>
 					</select>
 				</div>
 
@@ -89,7 +90,7 @@
 			<thead>
 				<tr>
 					<th>服务变更主题</th>
-					<th>创建时间</th>
+					<th>创建日期</th>
 					<th>审核状态</th>
 					<th>操作</th>
 				</tr>
