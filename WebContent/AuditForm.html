@@ -17,6 +17,24 @@
 	$(document).ready(function() {
 		//聚焦指定的Tab
 		$("#audit-tab").addClass("active");
+		
+		
+		$("#showSupportDetail").click(function(){
+			 $("#SupportDetail").attr("class","show");
+			 $("#showSupportDetail").attr("class","hidden");
+			 $("#hiddenSupportDetail").attr("class","btn btn-warning show");
+		});
+		
+		$("#hiddenSupportDetail").click(function(){
+			 $("#SupportDetail").attr("class","hidden");
+			 $("#showSupportDetail").attr("class","btn btn-success show");
+			 $("#hiddenSupportDetail").attr("class","hidden");
+		});
+		
+	
+		
+		
+		//hidden
 	});
 </script>
 
@@ -48,95 +66,94 @@
 		<div class="row">
 
 			<div class="span8 offset2">
-
-				<div class="page-header">
-					<h1>审核详情</h1>
+			     
+			     <button id="showSupportDetail" class="btn btn-success">显示申请信息详情</button>
+			     <button id="hiddenSupportDetail" class="hidden">隐藏申请信息详情!</button>
+			   
+   			
+				<div id="SupportDetail" class="hidden">
+					<hr>
+					<table class="table table-bordered table-striped">
+						<colgroup>
+							<col class="span2">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Tag</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>申请人</td>
+								<td>刘凯</td>
+							</tr>
+							<tr>
+								<td>申请时间</td>
+								<td>2012/6/8</td>
+							</tr>
+	
+							<tr>
+								<td>服务申请主题</td>
+								<td>申请一个服务器用于web业务</td>
+							</tr>
+	
+							<tr>
+								<td>申请起始时间</td>
+								<td>2012/6/6-2012/6/19</td>
+							</tr>
+							<tr>
+								<td>申请用途</td>
+								<td>用于Sobey cmop业务</td>
+							</tr>
+							<tr>
+								<td>资源类型</td>
+								<td>测试/演示资源</td>
+							</tr>
+							<tr>
+								<td>操作系统</td>
+								<td>CentOs5.5 server &mdash; 64 Bit</td>
+							</tr>
+							<tr>
+								<td>计算机资源</td>
+								<td><code>服务器类型:</code>Small &mdash; CPU[单核] Memory[1GB]
+									Disk[20GB].&nbsp; <code> 数量:</code>2个</td>
+							</tr>
+							<tr>
+								<td>存储资源</td>
+								<td><code>存储类型:</code>数据存储.&nbsp; <code>容量空间:</code>200G.&nbsp;
+									<code>吞吐量:</code>50 Mbps以内.&nbsp; <code>IOPS:</code>100</td>
+							</tr>
+							<tr>
+								<td>存储资源</td>
+								<td><code>存储类型:</code>业务存储.&nbsp; <code>容量空间:</code>200G.&nbsp;
+									<code>吞吐量:</code>50 Mbps以内.&nbsp; <code>IOPS:</code>100</td>
+							</tr>
+							<tr>
+								<td>接入服务</td>
+								<td><code>账号:</code>vpnAccout&nbsp; <code>使用人:</code>Vpner.&nbsp;
+									<code>需要访问主机:</code>127.0.0.1&nbsp; <code>接入方式:</code>VPN</td>
+							</tr>
+							<tr>
+								<td>公网IP申请</td>
+								<td><code>接入链路:</code>电信CTC &nbsp; <code>接入速率:</code>100M
+									&nbsp;</td>
+							</tr>
+							<tr>
+								<td>开放端口</td>
+								<td>telnet-23, &nbsp; http-80 , &nbsp; www-8080 &nbsp;</td>
+							</tr>
+							<tr>
+								<td>域名解析</td>
+								<td><code>解析类型:</code>NS &nbsp; <code>解析完整域名:</code>www.test.com
+									&nbsp; <code>目标IP地址:</code>198.168.5.2 &nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-
-				<div class="page-header">
-					<h3>申请信息</h3>
-				</div>
-
-				<table class="table table-bordered table-striped">
-					<colgroup>
-						<col class="span2">
-					</colgroup>
-					<thead>
-						<tr>
-							<th>Tag</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>申请人</td>
-							<td>刘凯</td>
-						</tr>
-						<tr>
-							<td>申请时间</td>
-							<td>2012/6/8</td>
-						</tr>
-
-						<tr>
-							<td>服务申请主题</td>
-							<td>申请一个服务器用于web业务</td>
-						</tr>
-
-						<tr>
-							<td>申请起始时间</td>
-							<td>2012/6/6-2012/6/19</td>
-						</tr>
-						<tr>
-							<td>申请用途</td>
-							<td>用于Sobey cmop业务</td>
-						</tr>
-						<tr>
-							<td>资源类型</td>
-							<td>测试/演示资源</td>
-						</tr>
-						<tr>
-							<td>操作系统</td>
-							<td>CentOs5.5 server &mdash; 64 Bit</td>
-						</tr>
-						<tr>
-							<td>计算机资源</td>
-							<td><code>服务器类型:</code>Small &mdash; CPU[单核] Memory[1GB]
-								Disk[20GB].&nbsp; <code> 数量:</code>2个</td>
-						</tr>
-						<tr>
-							<td>存储资源</td>
-							<td><code>存储类型:</code>数据存储.&nbsp; <code>容量空间:</code>200G.&nbsp;
-								<code>吞吐量:</code>50 Mbps以内.&nbsp; <code>IOPS:</code>100</td>
-						</tr>
-						<tr>
-							<td>存储资源</td>
-							<td><code>存储类型:</code>业务存储.&nbsp; <code>容量空间:</code>200G.&nbsp;
-								<code>吞吐量:</code>50 Mbps以内.&nbsp; <code>IOPS:</code>100</td>
-						</tr>
-						<tr>
-							<td>接入服务</td>
-							<td><code>账号:</code>vpnAccout&nbsp; <code>使用人:</code>Vpner.&nbsp;
-								<code>需要访问主机:</code>127.0.0.1&nbsp; <code>接入方式:</code>VPN</td>
-						</tr>
-						<tr>
-							<td>公网IP申请</td>
-							<td><code>接入链路:</code>电信CTC &nbsp; <code>接入速率:</code>100M
-								&nbsp;</td>
-						</tr>
-						<tr>
-							<td>开放端口</td>
-							<td>telnet-23, &nbsp; http-80 , &nbsp; www-8080 &nbsp;</td>
-						</tr>
-						<tr>
-							<td>域名解析</td>
-							<td><code>解析类型:</code>NS &nbsp; <code>解析完整域名:</code>www.test.com
-								&nbsp; <code>目标IP地址:</code>198.168.5.2 &nbsp;</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div class="page-header">
-					<h3>审核决定</h3>
+				<hr>
+				<div>
+					<h3>审核历史</h3>
 				</div>
 				<table class="table">
 					<colgroup>
@@ -173,20 +190,21 @@
 					</tbody>
 				</table>
 
-
+					<hr>
 				<form action="./AuditList.html">
 					<div class="control-group">
-						<div class="page-header">
+						<div>
 							<h3>审核意见</h3>
 						</div>
 						<div class="controls">
-							<textarea rows="3" id="bug_info" class="input-xlarge"
-								placeholder="审核意见"></textarea>
+							<textarea rows="2" id="bug_info" class="input-xlarge"></textarea>
 						</div>
 					</div>
-					<div class="form-actions">
-						<button class="btn btn-primary" type="submit">审核通过</button>
-						<button class="btn">审核不通过</button>
+					<hr>
+					<div>
+						<button class="btn btn-primary" type="submit">通过</button>
+						<button class="btn">不通过但继续</button>
+						<button class="btn">不通过且退回</button>
 					</div>
 				</form>
 			</div>
