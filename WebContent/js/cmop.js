@@ -5,13 +5,9 @@
  */
 function displayInputParameter(){
 	
-	
 	//标题
 	titile = "服务申请名+当前用户名+创建时间";
 	$("#td_title").html(titile);
-	
-	//起始日期
-	$("#td_time").html( $("#serviceStart").val() + '&nbsp;至&nbsp;' + $("#serviceEnd").val());
 	
 	//申请用途
 	$("#td_usage").html($("#usage").val());
@@ -25,6 +21,10 @@ function displayInputParameter(){
 	}else{
 		$("#td_resourceType").html("公测资源 ");
 	}
+	
+	//起始日期
+	$("#td_time").html( $("#serviceStart").val() + '&nbsp;至&nbsp;' + $("#serviceEnd").val());
+	
 	
 	/*接入服务*/
 	account = $("#account").val() ;
@@ -227,29 +227,50 @@ function switchTab(){
 	 });
 	
 }
+
 /**
- * 为起始时间设置默认值.默认值为"当前日期"至"当前日期1个月后"
+ * 获得指定月份后的日期.
+ * @param monthNum
+ * @returns {String}
+ */
+function getDateByMonthNum(monthNum){
+	
+	 var CurrentDate = new Date();
+	 CurrentDate.setMonth(CurrentDate.getMonth()+monthNum+1);
+	 
+	 var year = CurrentDate.getFullYear();   
+	 var month = CurrentDate.getMonth();
+	 if(month <= 9){
+    	 month = "0" + month;
+    }
+	 
+	 var day = CurrentDate.getDate();
+	if (day <= 9) {
+		day = "0" + day;
+	}
+	return year + "-" + month + "-" + day;
+	 
+}
+
+/**
+ * 为起始时间设置默认值.
  */
 function inputServiceDate()   
 {   
-    var date = new Date();   
-    var year = date.getFullYear();   
-    var month = date.getMonth() + 1;   
-    if(month <= 9){
-    	 month = "0" + month;
-    }
-    var afterMonth = date.getMonth() + 2; //加1表示1个月后
-    if(afterMonth<=9){
-    	afterMonth = "0"+afterMonth;
-    }
     
-    var day = date.getDate();   
-    if (day <= 9){
-    	day = "0" + day;
-    }
-    
-    $("#serviceStart").val(year + "-" + month + "-" + day); //当前日期
-    $("#serviceEnd").val(year + "-" + afterMonth + "-" + day); //一个月后的日期
+	$("input[name='resourceType']").click(function(){
+		resourceType = $("input[name='resourceType']:checked").val();
+		if (resourceType == 1) {
+			// 生产资源
+			$("#serviceEnd").val(getDateByMonthNum(6) ); // 6个月后的日期
+		} else if (resourceType == 2) {//测试资源
+			$("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+		} else {
+			// 公测资源
+			$("#serviceEnd").val(getDateByMonthNum(3)); // 3个月后的日期
+
+		}
+	});
     
 }
 

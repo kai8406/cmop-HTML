@@ -15,6 +15,7 @@
 <script src="js/bootstrap.min.js"></script>
 
 <script>
+
 	$(document).ready(function() {
 		//聚焦指定的Tab
 		$("#support-tab").addClass("active");
@@ -47,54 +48,88 @@
 
 
 		<div class="row">
+		
 			<div id="leftbar" class="span2">
-				<ul class="nav nav-list">
+		       <ul class="nav nav-list">
+		         <li class="divider"></li>
+		          <li class="nav-header">计算资源</li>
+		          <li><a href="./SupportComputeForm.html"><i class="icon-book"></i> PM</a></li>
+		          <li><a href="#"><i class="icon-pencil"></i> ECS</a></li>
+		            <li class="divider"></li>
+		          <li class="nav-header">存储资源</li>
+		          <li><a href="./SupportEBSForm.html"><i class="icon-user"></i> EBS</a></li>
+		          <li><a href="./SupportES3Form.html"><i class="icon-cog"></i> ES3</a></li>
+		            <li class="divider"></li>
+		          <li class="nav-header">网络资源</li>
+		          <li><a href="#"><i class="icon-user"></i> Profile</a></li>
+		          <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+		        
+		        </ul>
+      
+				<!-- 	<ul class="nav nav-list">
 					<li><a href="./SupportComputeForm.html">计算资源申请</a></li>
 					<li><a href="./SupportStorageForm.html">存储资源申请</a></li>
 					<li><a href="./SupportJoinForm.html">接入服务申请</a></li>
 					<li><a href="./SupportNetworkForm.html">网络资源申请</a></li>
 					<li class="divider"></li>
-				</ul>
+				</ul> -->
 			</div>
 
 			<div id="main" class="span10">
 
-				<div class="row">
-					<div class="span4">
-
-						<fieldset>
-							<legend>向导</legend>
-							<p>点击按钮,可根据自身业务需求创建一个服务申请.</p>
-
-							<a class="btn btn-info" href="./SupportForm.html">服务申请</a>
-
-						</fieldset>
-
-					</div>
-
-					<div class="span4 offset1">
-						<div class="row">
-							<fieldset>
-								<legend>我的资源</legend>
-								<div class="span2">
-									<a href="#">4 运行实例</a>
-								</div>
-								<div class="span2">
-									<a href="#">9 网络资源</a>
-								</div>
-								<hr/>
-								<div class="span2">
-									<a href="#">11 EBS</a>
-								</div>
-								<div class="span2">
-									<a href="#">2 接入资源</a>
-								</div>
-							</fieldset>
+				<div id="myResources">
+					<h3>我的资源</h3>
+					<div class="row page-header">
+						<div class="span2">
+							<a href="#">4 运行实例</a>
+						</div>
+						<div class="span2">
+							<a href="#">9 网络资源</a>
+						</div>
+						<div class="span2">
+							<a href="#">11 EBS</a>
+						</div>
+						<div class="span2">
+							<a href="#">2 接入资源</a>
+						</div>
+						<div class="span2">
+							<a href="#">4 运行实例</a>
+						</div>
+						<div class="span2">
+							<a href="#">9 网络资源</a>
+						</div>
+						<div class="span2">
+							<a href="#">11 EBS</a>
+						</div>
+						<div class="span2">
+							<a href="#">2 接入资源</a>
+						</div>
+						<div class="span2">
+							<a href="#">11 EBS</a>
+						</div>
+						<div class="span2">
+							<a href="#">2 接入资源</a>
 						</div>
 					</div>
 
 				</div>
-				<br>
+<!-- 
+				<div id="myResources">
+				<h3>我的资源</h3>
+				<ul class="breadcrumb">
+					<li><a href="#">EBS 1</a> <span class="divider">/</span></li>
+					<li><a href="#">EC3 3</a> <span class="divider">/</span></li>
+					<li><a href="#">EDO 11</a> <span class="divider">/</span></li>
+					<li><a href="#">运行实例 2</a> <span class="divider">/</span></li>
+					<li><a href="#">EBS 1</a> <span class="divider">/</span></li>
+					<li><a href="#">EC3 3</a> <span class="divider">/</span></li>
+					<li><a href="#">EDO 11</a> <span class="divider">/</span></li>
+					<li><a href="#">运行实例 2</a> <span class="divider">/</span></li>
+					<li><a href="#">EDO 11</a> <span class="divider">/</span></li>
+					<li><a href="#">运行实例 2</a> <span class="divider">/</span></li>
+				</ul>
+				</div>
+ -->
 
 				<!-- Search -->
 				<form class="well well-small form-search" action="./SupportList.html">
@@ -133,7 +168,7 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th>服务申请主题</th>
+							<th>主题</th>
 							<th>创建时间</th>
 							<th>审核状态</th>
 							<th>操作</th>
