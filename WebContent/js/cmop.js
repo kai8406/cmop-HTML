@@ -7,7 +7,8 @@ function displayInputParameter(){
 	
 	
 	//标题
-	$("#td_title").html($("#title").val());
+	titile = "服务申请名+当前用户名+创建时间";
+	$("#td_title").html(titile);
 	
 	//起始日期
 	$("#td_time").html( $("#serviceStart").val() + '&nbsp;至&nbsp;' + $("#serviceEnd").val());
@@ -226,6 +227,35 @@ function switchTab(){
 	 });
 	
 }
+/**
+ * 为起始时间设置默认值.默认值为"当前日期"至"当前日期1个月后"
+ */
+function inputServiceDate()   
+{   
+    var date = new Date();   
+    var year = date.getFullYear();   
+    var month = date.getMonth() + 1;   
+    if(month <= 9){
+    	 month = "0" + month;
+    }
+    var afterMonth = date.getMonth() + 2; //加1表示1个月后
+    if(afterMonth<=9){
+    	afterMonth = "0"+afterMonth;
+    }
+    
+    var day = date.getDate();   
+    if (day <= 9){
+    	day = "0" + day;
+    }
+    
+    $("#serviceStart").val(year + "-" + month + "-" + day); //当前日期
+    $("#serviceEnd").val(year + "-" + afterMonth + "-" + day); //一个月后的日期
+    
+}
+
+
+
+
 
 
 
