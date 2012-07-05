@@ -25,6 +25,21 @@
 		//聚焦指定的Tab
 		$("#support-tab").addClass("active");
 		
+		//操作系统
+		if($("input[name^='osBit']:checked")){
+			//alert($("input[name^='osBit']:checked").val());
+		}
+		
+		$("input[name^='osBit']:checked").each(function(){
+			
+			//serverNum
+			//位数 $(this).val()
+			
+			var trx = $(this).parent().parent();
+			alert(trx.find("#serverNum").val());
+			
+		});		
+		
 		switchTab();
 		
 		//起始时间
@@ -160,7 +175,7 @@
 											<input type="radio" value="2" name="osBit1" /> 64 Bit
 							            </td>
 							            <td>
-							            	<input type="text" value="" name="" class="input-mini" />
+							            	<input type="text" id="serverNum"   name="serverNum" class="input-mini" />
 							            </td>
 							          </tr>
 							          <!-- 2 -->
