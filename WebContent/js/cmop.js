@@ -115,7 +115,7 @@ function displayInputParameter(){
  		osBit = "64 Bit"; 
  	}
 	
-	$("#td_osType").html(osName+" &mdash;"+osBit);
+	//$("#td_osType").html(osName+" &mdash;"+osBit);
 	
 	$("#td_serverType").html("<code>服务器类型:</code>"+serverTypeName+"<code>虚拟机数量:</code>"+instancesNum);
 	
@@ -209,8 +209,33 @@ function switchTab(){
 	
 	var nextSteps = $("a[id^='nextStep']");
 	nextSteps.click(function(){
+		
 		$('#myTab li:eq('+ (nextSteps.index(this) + 1) +') a').tab('show'); 
 		displayInputParameter();
+		
+		
+		//
+		/*将已选择的资源显示在详情列表中*/ 
+		$("tr.ResourcesDetail").remove();
+		var str = "";
+		$("#selectedResources #singleResources").each(function(){
+			str += "<tr class='ResourcesDetail'>" +
+					"<td>计算资源</td>" +
+					"<td><code>操作系统:</code>"+
+						$(this).children("#osName_SingleResources").text()+"&nbsp;"+ $(this).children("#osBitName__SingleResources").text()+
+						"<code>规格:</code>"+$(this).children("#serverTypeName__SingleResources").text()+
+						"<code>数量:</code>"+$(this).children("#serverCount__SingleResources").text()+"" +
+					"</td>" +
+					"</tr>"; 
+			
+		});
+		
+		//最后插入
+		$("#formDetail tbody:last-child").append(str);
+		
+		//
+	
+		
 	 });
 	
 	var backSteps = $("a[id^='backStep']");
@@ -226,15 +251,162 @@ function switchTab(){
 		displayInputParameter();
 	 });
 	
+	
+	
+		
+}
+
+
+/**
+ *  根据bitID获得对应的Bit名称
+ * @param bitId . 1-32 Bit ; 2-64 Bit
+ * @returns {String}
+ */
+function getBitName(bitId){
+	if(bitId == 1){
+		return "32 Bit";
+	}else{
+		return "64 Bit";
+	}
+}
+
+
+/**
+ * 根据服务器类型ID获得服务器类型信息
+ * @param serverTypeId 服务器类型ID. 1-Small；2-Middle；3-Large
+ * @returns {String}
+ */
+function getServerTypeNameByServerTypeId(serverTypeId){
+	
+	if(serverTypeId == 1){
+		return "Small &mdash;CPU[单核] Memory[1GB] Disk[20GB]";
+	}else if(serverTypeId == 2 ){
+		return "Middle &mdash; CPU[双核] Memory[2GB] Disk[20GB]";
+	}else{
+		return "Large &mdash; CPU[四核] Memory[4GB] Disk[20GB]";
+	}
 }
 
 /**
+ *  根据操作系统的ID获得操作系统的名称
+ * @param osId 操作系统ID
+ * @returns {String}
+ */
+function getOSNameByOSId(osId){
+	if(osId == 1){
+		return "Windwos2003R2";
+	}else if(osId ==2){
+		return "Windwos2008R2";
+	}else if(osId ==3){
+		return "Centos5.6";
+	}else{
+		return "Centos6.3";
+	}
+}
+
+/**
+ * 填入参数,获得插入至文本的div字符串.
+ * @param osId 操作系统ID
+ * @param bitValue 选中Bit的value
+ * @param serverTypeId 服务器类型ID
+ * @param serverCount 服务器数量
+ * @returns
+ */
+function appendSingleResourcesStr(osId,bitValue,serverTypeId,serverCount){
+	
+	 str = "<div class='row alert' id='singleResources'>";
+	 str +="<div class='span1' id='osName_SingleResources'>"+getOSNameByOSId(osId)+"</div>";
+	 str +="<div class='hidden' id='osId_SingleResources'>"+osId+"</div>";
+	 
+	 str +="<div class='hidden' id='osBitId__SingleResources'>"+bitValue+"</div>";
+	 str +="<div class='span1' id='osBitName__SingleResources'>"+getBitName(bitValue)+"</div>";
+	 
+	 str +="<div class='hidden' id='serverTypeId__SingleResources'>"+serverTypeId+"</div>";
+	 str +="<div class='span4' id='serverTypeName__SingleResources'>"+getServerTypeNameByServerTypeId(serverTypeId)+"</div>";
+	 
+	 str +="<div class='span1' id='serverCount__SingleResources'>"+serverCount+"</div>";
+	 
+	 str +="<button class='close' data-dismiss='alert'>&times;</button></div>";
+	 return str;
+}
+
+/**
+ * 选择服务器.
+ * @param object
+ */
+function selectServer(object,modalObject){
+	
+	//所选择的OS
+	var osId =  object.parent().parent().find("#osId").text();
+	
+	//所选择的bit:第一个OS下的位数.
+	var checkOsBit = object.parent().parent().find("input[name^='osBit']:checked").val();
+	
+	
+	var smallCount = modalObject.parent().parent().find("#smallServerCount").val();//所选规格small的数量
+	 if(smallCount != ""){//数量框不为空
+		 
+		var smallTypeId =  $("#smallTypeId").text(); //服务器类型ID; 1 
+		
+		 //如果已有相同的OS,Bit和规格,则删除已有的.
+		 $("#selectedResources #singleResources").each(function(){
+			 
+			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
+					 && $(this).children("#serverTypeId__SingleResources").text() == smallTypeId ){
+				 $(this).remove();
+			 }
+		});
+		 
+		 //将选中的信息(OS,BIT,服务器规格和数量)在页面显示.
+		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,smallTypeId,smallCount));
+	 }
+	 
+	 
+	 var middleCount = modalObject.parent().parent().find("#middleServerCount").val();//所选规格middle的数量
+	 if(middleCount != ""){//数量框不为空
+		 
+		 var middleTypeId =  $("#middleTypeId").text(); //服务器类型ID; 2 
+		 
+		 //如果已有相同的OS,Bit和规格,则删除已有的.
+		 $("#selectedResources #singleResources").each(function(){
+			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
+					 && $(this).children("#serverTypeId__SingleResources").text() == middleTypeId ){
+				 $(this).remove();
+			 }
+		});
+		 
+		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,middleTypeId,smallCount));
+		 
+	 }
+	 
+	 var largeCount = modalObject.parent().parent().find("#largeServerCount").val();;//所选规格large的数量
+	 if(largeCount != ""){//数量框不为空
+		 
+		 
+		 var largeTypeId =  $("#largeTypeId").text(); //服务器类型ID; 3 
+		 
+		 //如果已有相同的OS,Bit和规格,则删除已有的.
+		 $("#selectedResources #singleResources").each(function(){
+			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
+					 && $(this).children("#serverTypeId__SingleResources").text() == largeTypeId ){
+				 $(this).remove();
+			 }
+		});
+		 
+		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,largeTypeId,smallCount));
+	 }
+	
+}
+
+
+
+
+/**
  * 获得指定月份后的日期.
- * @param monthNum
+ * @param monthNum 指定多少月后
  * @returns {String}
  */
 function getDateByMonthNum(monthNum){
-	
 	 var CurrentDate = new Date();
 	 CurrentDate.setMonth(CurrentDate.getMonth()+monthNum+1);
 	 
@@ -243,7 +415,6 @@ function getDateByMonthNum(monthNum){
 	 if(month <= 9){
     	 month = "0" + month;
     }
-	 
 	 var day = CurrentDate.getDate();
 	if (day <= 9) {
 		day = "0" + day;
@@ -254,10 +425,12 @@ function getDateByMonthNum(monthNum){
 
 /**
  * 为起始时间设置默认值.
+ * 测试资源:默认从申请日起到1个月
+ * 公测资源:默认从申请日起到3个月
+ * 生产资源:默认从申请日起到6个月
  */
 function inputServiceDate()   
 {   
-    
 	$("input[name='resourceType']").click(function(){
 		resourceType = $("input[name='resourceType']:checked").val();
 		if (resourceType == 1) {
@@ -268,7 +441,6 @@ function inputServiceDate()
 		} else {
 			// 公测资源
 			$("#serviceEnd").val(getDateByMonthNum(3)); // 3个月后的日期
-
 		}
 	});
     
