@@ -35,51 +35,16 @@ function displayInputParameter(){
 	
 	/*存储资源*/
 	//存储资源:数据存储
-	if($('#dataStorageType').is(":checked")){
-		
-		$("#tr_dataStorage").show();
-		
-		//容量空间
-		space = $("input[name='dataSorageSpace']:checked").val();
-		
-		//Throughput（吞吐量）
-	 	if($("input[name='dataStorageThroughput']:checked").val() === 1){
-	 		throughput = "50 Mbps以内"; 
-	 	}else{
-	 		throughput = "50 Mbps以上"; 
-	 	}
-		
-		//IOPS（每秒进行读写（I/O）操作的次数）
-		iops = $("#dataStorageIops").val();
-		
-	 	$("#td_dataStorage").html("<code>存储类型:</code>数据存储<code>容量空间:</code>"+space+"G<code>吞吐量:</code>"+throughput+"<code>IOPS:</code>"+iops);
-	 	
-	}else{
-		$("#tr_dataStorage").hide();
-	}
 	
-	//存储资源:业务存储
-	if($('#businessStorageType').is(":checked")){
-		
-		$("#tr_businessStorage").show();
 		
 		//容量空间
-		space = $("input[name='businessStorageSpace']:checked").val();
+	space = $("input[name='storageSpace']:checked").val();
 		
-		//Throughput（吞吐量）
-	 	if($("input[name='businessStorageThroughput']:checked").val() === 1){
-	 		throughput = "50 Mbps以内"; 
-	 	}else{
-	 		throughput = "50 Mbps以上"; 
-	 	}
-		
-		//IOPS（每秒进行读写（I/O）操作的次数）
-		iops = $("#businessStorageIops").val();
-		
-	 	$("#td_businessStorage").html("<code>存储类型:</code>业务存储<code>容量空间:</code>"+space+"G<code>吞吐量:</code>"+throughput+"<code>IOPS:</code>"+iops);
-	}else{
-		$("#tr_businessStorage").hide();
+	if($("#otherSpace").is(":checked")){
+		$("#otherSpace").val($("#otherSpaceValue").val());
 	}
+	$("#td_storage").html(space);
+	
 	
 	
 	/*计算资源*/
@@ -213,7 +178,6 @@ function switchTab(){
 		$('#myTab li:eq('+ (nextSteps.index(this) + 1) +') a').tab('show'); 
 		displayInputParameter();
 		
-		
 		//
 		/*将已选择的资源显示在详情列表中*/ 
 		$("tr.ResourcesDetail").remove();
@@ -234,6 +198,27 @@ function switchTab(){
 		$("#formDetail tbody:last-child").append(str);
 		
 		//
+		
+		 var osTypes= [];
+		 var bits= [];
+		 var serverTypeIds = [];
+		 var serverCount = [];
+		 
+		$("#selectedResources #singleResources").each(function() {
+			 var osId = $(this).find("#osId_SingleResources").text();
+			 var checkOsBit = $(this).find("#osBitId__SingleResources").text();
+			 var middleTypeId = $(this).find("#serverTypeId__SingleResources").text();
+			 var middleCount = $(this).find("#serverCount__SingleResources").text();
+			 
+			
+			 osTypes.push(osId);                
+			 bits.push(checkOsBit);             
+			 serverTypeIds.push(middleTypeId);   
+			 serverCount.push(middleCount);      
+			 
+		});
+		
+		
 	
 		
 	 });
@@ -326,7 +311,7 @@ function appendSingleResourcesStr(osId,bitValue,serverTypeId,serverCount){
 	 
 	 str +="<div class='span1' id='serverCount__SingleResources'>"+serverCount+"</div>";
 	 
-	 str +="<button class='close' data-dismiss='alert'>&times;</button></div>";
+	 str +="<button class='close' id='removeResources' data-dismiss='alert'>&times;</button></div>";
 	 return str;
 }
 
@@ -349,12 +334,13 @@ function selectServer(object,modalObject){
 		var smallTypeId =  $("#smallTypeId").text(); //服务器类型ID; 1 
 		
 		 //如果已有相同的OS,Bit和规格,则删除已有的.
-		 $("#selectedResources #singleResources").each(function(){
+		 $("#selectedResources #singleResources:visible").each(function(){
 			 
 			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
 					 && $(this).children("#serverTypeId__SingleResources").text() == smallTypeId ){
 				 $(this).remove();
 			 }
+			 
 		});
 		 
 		 //将选中的信息(OS,BIT,服务器规格和数量)在页面显示.
@@ -368,7 +354,7 @@ function selectServer(object,modalObject){
 		 var middleTypeId =  $("#middleTypeId").text(); //服务器类型ID; 2 
 		 
 		 //如果已有相同的OS,Bit和规格,则删除已有的.
-		 $("#selectedResources #singleResources").each(function(){
+		 $("#selectedResources #singleResources:visible").each(function(){
 			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
 					 && $(this).children("#serverTypeId__SingleResources").text() == middleTypeId ){
 				 $(this).remove();
@@ -386,7 +372,7 @@ function selectServer(object,modalObject){
 		 var largeTypeId =  $("#largeTypeId").text(); //服务器类型ID; 3 
 		 
 		 //如果已有相同的OS,Bit和规格,则删除已有的.
-		 $("#selectedResources #singleResources").each(function(){
+		 $("#selectedResources #singleResources:visible").each(function(){
 			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
 					 && $(this).children("#serverTypeId__SingleResources").text() == largeTypeId ){
 				 $(this).remove();
