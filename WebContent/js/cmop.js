@@ -26,25 +26,10 @@ function displayInputParameter(){
 	$("#td_time").html( $("#serviceStart").val() + '&nbsp;至&nbsp;' + $("#serviceEnd").val());
 	
 	
-	/*接入服务*/
-	account = $("#account").val() ;
-	user = $("#accountUser").val();
-	visitHost = $("#visitHost").val();
-	$("#td_inVpnItem").html("<code>账号:</code>"+account+"<code>使用人:</code>"+user+"<code>需要访问主机:</code>"+visitHost);
+
 	
-	
-	/*存储资源*/
-	//存储资源:数据存储
-	
-		
-		//容量空间
-	space = $("input[name='storageSpace']:checked").val();
-		
-	if($("#otherSpace").is(":checked")){
-		$("#otherSpace").val($("#otherSpaceValue").val());
-	}
+	space = $("input[name='storageSpace']:checked").val();	//容量空间
 	$("#td_storage").html(space);
-	
 	
 	
 	/*计算资源*/
@@ -185,7 +170,7 @@ function switchTab(){
 		$("#selectedResources #singleResources").each(function(){
 			str += "<tr class='ResourcesDetail'>" +
 					"<td>计算资源</td>" +
-					"<td><code>操作系统:</code>"+
+					"<td>"+
 						$(this).children("#osName_SingleResources").text()+"&nbsp;"+ $(this).children("#osBitName__SingleResources").text()+
 						"<code>规格:</code>"+$(this).children("#serverTypeName__SingleResources").text()+
 						"<code>数量:</code>"+$(this).children("#serverCount__SingleResources").text()+"" +
@@ -199,7 +184,7 @@ function switchTab(){
 		
 		//
 		
-		 var osTypes= [];
+		var osTypes= [];
 		 var bits= [];
 		 var serverTypeIds = [];
 		 var serverCount = [];
@@ -218,7 +203,11 @@ function switchTab(){
 			 
 		});
 		
-		
+	 	$("#osTypes").val(osTypes);
+	  	$("#bits").val(bits);
+	  	$("#serverTypeIds").val(serverTypeIds);
+	  	$("#serverCount").val(serverCount);
+
 	
 		
 	 });
@@ -311,7 +300,7 @@ function appendSingleResourcesStr(osId,bitValue,serverTypeId,serverCount){
 	 
 	 str +="<div class='span1' id='serverCount__SingleResources'>"+serverCount+"</div>";
 	 
-	 str +="<button class='close' id='removeResources' data-dismiss='alert'>&times;</button></div>";
+	 str +="<button class='close' data-dismiss='alert'>&times;</button></div>";
 	 return str;
 }
 
@@ -320,6 +309,8 @@ function appendSingleResourcesStr(osId,bitValue,serverTypeId,serverCount){
  * @param object
  */
 function selectServer(object,modalObject){
+	
+	 	modalId =  modalObject.parent().parent().attr("id"); //弹出框ID
 	
 	//所选择的OS
 	var osId =  object.parent().parent().find("#osId").text();
@@ -334,34 +325,32 @@ function selectServer(object,modalObject){
 		var smallTypeId =  $("#smallTypeId").text(); //服务器类型ID; 1 
 		
 		 //如果已有相同的OS,Bit和规格,则删除已有的.
-		 $("#selectedResources #singleResources:visible").each(function(){
+		 $("#selectedResources #singleResources").each(function(){
 			 
 			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
 					 && $(this).children("#serverTypeId__SingleResources").text() == smallTypeId ){
 				 $(this).remove();
 			 }
-			 
 		});
 		 
-		 //将选中的信息(OS,BIT,服务器规格和数量)在页面显示.
 		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,smallTypeId,smallCount));
-	 }
-	 
-	 
+	 }    	 
+	      	 
+	      	 
 	 var middleCount = modalObject.parent().parent().find("#middleServerCount").val();//所选规格middle的数量
 	 if(middleCount != ""){//数量框不为空
 		 
 		 var middleTypeId =  $("#middleTypeId").text(); //服务器类型ID; 2 
 		 
 		 //如果已有相同的OS,Bit和规格,则删除已有的.
-		 $("#selectedResources #singleResources:visible").each(function(){
+		 $("#selectedResources #singleResources").each(function(){
 			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
 					 && $(this).children("#serverTypeId__SingleResources").text() == middleTypeId ){
 				 $(this).remove();
 			 }
 		});
 		 
-		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,middleTypeId,smallCount));
+		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,middleTypeId,middleCount));
 		 
 	 }
 	 
@@ -372,15 +361,17 @@ function selectServer(object,modalObject){
 		 var largeTypeId =  $("#largeTypeId").text(); //服务器类型ID; 3 
 		 
 		 //如果已有相同的OS,Bit和规格,则删除已有的.
-		 $("#selectedResources #singleResources:visible").each(function(){
+		 $("#selectedResources #singleResources").each(function(){
 			 if($(this).children("#osId_SingleResources").text()== osId && $(this).children("#osBitId__SingleResources").text() == checkOsBit 
 					 && $(this).children("#serverTypeId__SingleResources").text() == largeTypeId ){
 				 $(this).remove();
 			 }
 		});
 		 
-		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,largeTypeId,smallCount));
+		 $("#selectedResources ").append(appendSingleResourcesStr(osId,checkOsBit,largeTypeId,largeCount));
 	 }
+	 
+	  
 	
 }
 
