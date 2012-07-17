@@ -55,7 +55,14 @@
 		
 		$("#mountBtn").live("click",function(){
 			//设置class 包含mountBtn的a标签name为指定的值用于区分哪个存储空间执行挂载
+			
+			 $("a.mountBtn").attr("name","");//将class为mountBtn的a标签name 设置为""
+			
 			$(this).attr("name","mountBtn");
+			
+			//默认清空checkbox
+			$("input:checkbox[name='ids']").removeAttr('checked');
+
 		});
 		
 
@@ -85,10 +92,10 @@
 		
 			//插入挂载行
 			 str = "<div class='row alert' id='storageList'>";
-			 str +="<div class='span2' id='space'>"+dataSorageSpace+"&nbsp;GB</div>";
+			 str +="<div class='span1' id='space'>"+dataSorageSpace+"&nbsp;GB</div>";
 			 str +="<div class='hidden' id='space_value'>"+dataSorageSpace+"</div>";
-			 str +="<div id='mountServer' class='span4'></div>";
 			 str +="<div class='span1 '><a id='mountBtn' name='' class='btn btn-warning mountBtn' data-toggle='modal' href='#es3Modal'>挂载</a></div>";
+			 str +="<div id='mountServer' class='span4'></div>";
 			 str +="<button class='close' id='removeStorage' data-dismiss='alert'>&times;</button></div>";
 			$("#storageAllList").append(str);
 			
@@ -226,14 +233,14 @@
 							
 							<div id="storageAllList" class="span8">
 
+
 								<div id="storageList" class="row alert">
-									<div id="space" class="span2">20&nbsp;GB</div>
+									<div id="space" class="span1">20&nbsp;GB</div>
 									<div id="space_value" class="hidden">20</div>
-									<div id="mountServer" class="span4"></div>
 									<div class="span1">
-										<a href="#es3Modal" data-toggle="modal" name=""
-											class="btn btn-warning mountBtn" id="mountBtn">挂载</a>
+										<a href="#es3Modal" data-toggle="modal" name="" class="btn btn-warning mountBtn" id="mountBtn">挂载</a>
 									</div>
+									<div id="mountServer" class="span4"></div>
 									<button data-dismiss="alert" id="removeStorage" class="close">×</button>
 								</div>
 
