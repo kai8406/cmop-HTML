@@ -170,16 +170,16 @@
 								<legend>ELB </legend>
 
 								<div class="control-group">
-									<label class="control-label">带宽</label>
-									<div class="controls">
-										<label class="radio"> <input type="radio"
-											id="resourceType" value="1" name="resourceType" />250M以下
-										</label> <label class="radio"> <input type="radio"
-											id="resourceType" value="2" name="resourceType"
-											checked="checked" /> 250M以上
-										</label>
+										<label class="control-label">带宽</label>
+										<div class="controls">
+											<label class="radio"> <input type="radio"
+												id="resourceType" value="1" name="resourceType" /> &lt; 250M 
+											</label> <label class="radio"> <input type="radio"
+												id="resourceType" value="2" name="resourceType"
+												checked="checked" /> &ge; 250M
+											</label>
+										</div>
 									</div>
-								</div>
 									
 
 								<table id="LB_table"
@@ -223,7 +223,9 @@
 													<option value="4">SSL</option>
 											</select></td>
 											<td><input type="text" class="input-medium" /></td>
-											<td><a class="btn btn-warning" id="saveLB">Save</a></td>
+											<td>
+											<a class="btn btn-warning" id="saveLB">Save</a>
+											</td>
 										</tr>
 
 									</tbody>

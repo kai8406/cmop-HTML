@@ -154,46 +154,41 @@
 								<legend>EFW </legend>
 								
 								<div class="control-group">
-									<label class="control-label">带宽</label>
-									<div class="controls">
-										<label class="radio"> <input type="radio"
-											id="resourceType" value="1" name="resourceType" />250M以下
-										</label> <label class="radio"> <input type="radio"
-											id="resourceType" value="2" name="resourceType"
-											checked="checked" /> 250M以上
-										</label>
+										<label class="control-label">带宽</label>
+										<div class="controls">
+											<label class="radio"> <input type="radio"
+												id="resourceType" value="1" name="resourceType" /> &lt; 250M 
+											</label> <label class="radio"> <input type="radio"
+												id="resourceType" value="2" name="resourceType"
+												checked="checked" /> &ge; 250M
+											</label>
+										</div>
 									</div>
-								</div>
 								
 								<div class="control-group">
-									<label class="control-label">开放端口</label>
-									<div class="controls">
-										<label class="checkbox"> 
-											<input type="checkbox"  name="networkPort" value="1"/> FTP-21
-										</label> 
-										<label class="checkbox"> 
-											<input type="checkbox"  name="networkPort" value="2"/> Telnet-23
-										</label> 
-										<label class="checkbox"> 
-											<input type="checkbox"  name="networkPort" value="3"/> DNS-32
-										</label> 
-										<label class="checkbox"> 
-											<input type="checkbox"  name="networkPort" value="4"/> Http-80
-										</label> 
-										<label class="checkbox"> 
-											<input type="checkbox"  name="networkPort" value="5"/> https-443
-										</label> 
-										<label class="checkbox"> 
-											<input type="checkbox"  name="networkPort" value="6"/> www-8080
-										</label> 
-										
-										<label class="checkbox"> 
-											<input type="checkbox" name="" 	value="" /> 其它服务端 
-											<input type="text" name="" value=""  class="input-medium" />
-										</label> 
-										
+										<label class="control-label">开放端口</label>
+										<div class="controls">
+											<label class="checkbox inline"> <input type="checkbox"
+												name="networkPort" value="1" /> FTP-21
+											</label> <label class="checkbox inline"> <input type="checkbox"
+												name="networkPort" value="2" /> Telnet-23
+											</label> <label class="checkbox inline"> <input type="checkbox"
+												name="networkPort" value="3" /> DNS-32
+											</label> <label class="checkbox inline"> <input type="checkbox"
+												name="networkPort" value="4" /> Http-80
+											</label> <label class="checkbox inline"> <input type="checkbox"
+												name="networkPort" value="5" /> https-443
+											</label> 
+											<label class="checkbox inline"> 
+												<input type="checkbox"	name="networkPort" value="6" /> www-8080
+											</label> 
+											<label class="checkbox  ">
+												<input type="checkbox" name="" value="" /> 其它端口 
+												<input type="text" name="" value="" class="input-mini" />
+											</label>
+
+										</div>
 									</div>
-								</div>
 										
 								
  
