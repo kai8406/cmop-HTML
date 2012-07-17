@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sobey--云平台服务-服务申请</title>
+<title>Sobey--云平台服务-服务变更</title>
 <!-- Le styles -->
 <link href="css/cmop.css" rel="stylesheet">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -16,10 +16,14 @@
 <script src="js/bootstrap.min.js"></script>
 
 <script>
-
 	$(document).ready(function() {
 		//聚焦指定的Tab
 		$("#support-tab").addClass("active");
+		
+		 
+		$("#ecs-bar").addClass("active");
+		$("#ecs-icon").addClass("icon-white");
+		
 	});
 </script>
 
@@ -47,9 +51,7 @@
 			</ul>
 		</div>
 
-
 		<div class="row">
-		
 			<div id="leftbar" class="span2">
 				<ul class="nav nav-list">
 					<li class="nav-header">计算资源</li>
@@ -71,70 +73,38 @@
 			</div>
 
 			<div id="main" class="span10">
-
-				<div id="myResources">
-					<h3>我的资源</h3>
-					<div class="row page-header">
-						<div class="span2">
-							<a href="#">ECS 2 </a>
-						</div>
-						<div class="span2">
-							<a href="#">ES3 5</a>
-						</div>
-						<div class="span2">
-							<a href="#">ELB 1 </a>
-						</div>
-						<div class="span2">
-							<a href="#">EIP 15</a>
-						</div>
-						<div class="span2">
-							<a href="#">EFW 3</a>
-						</div>
-					</div>
-				</div>
+				<a class="btn btn-info pager" href="./SupportECSForm.html">Create ECS</a>
 
 				<!-- Search -->
-				<form class="well well-small form-search " action="./SupportList.html">
+				<form class="well well-small form-search"
+					action="./FeatureList.html">
 
 					<div class="row-fluid show-grid">
 
-						<div class="span4">
-							<label class="control-label ">主题:</label> 
-							<input type="text" id="title" name="title"	placeholder="服务申请主题" class="input-medium">
+						<div class="span3">
+							<label class="control-label">主题:</label> <input type="text"
+								id="title" name="title" placeholder="变更主题" class="input-medium" />
 						</div>
 
-						<div class="span4">
-							<label class="control-label">审核状态:</label> 
-							<select
-								class="input-mini">
-								<option></option>
-								<option value="1">待审核</option>
-								<option value="2">审核中</option>
-								<option value="3">已审核</option>
-								<option value="4">已退回</option>
-							</select>
-						</div>
-						<div class="span2">
+						<div class="span3">
 							<button class="btn" type="submit">Search</button>
 						</div>
+
 					</div>
 				</form>
 
-
-				<!-- Table -->
 				<table class="table table-striped table-bordered table-condensed">
 					<colgroup>
-						<col class="span3">
+						<col class="span6">
 						<col class="span2">
 						<col class="span2">
-						<col class="span1">
 						<col class="span2">
 					</colgroup>
+
 					<thead>
 						<tr>
-							<th>主题</th>
-							<th>申请类型</th>
-							<th>创建时间</th>
+							<th>服务变更主题</th>
+							<th>创建日期</th>
 							<th>审核状态</th>
 							<th>操作</th>
 						</tr>
@@ -142,77 +112,80 @@
 					<tbody>
 						<tr>
 							<td>liukai</td>
-							<td>ESC</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-important">待审核</span></td>
-							<td>
-								<a  href="./SupportECSDetail.html">查看</a> 
-								<a  href="./SupportForm.html">修改</a>
-							</td>
+							<td><a href="./FeatureDetail.html">查看</a> <a
+								href="./FeatureForm.html">修改</a></td>
 						</tr>
 						<tr>
 							<td>liukai</td>
-							<td>PM</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-warning">审核中</span></td>
-							<td>
-								<a  href="./SupportDetail.html">查看</a>
-								<a  href="./SupportForm.html">修改</a>
-							</td>
+							<td><a href="./FeatureDetail.html">查看</a> <a
+								href="./FeatureForm.html">修改</a></td>
 						</tr>
 						<tr>
 							<td>liukai</td>
-							<td>ES3</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-success">已审核</span></td>
-							<td>
-								<a  href="./SupportDetail.html">查看</a> 
-								<a  href="./SupportDetail.html">修改</a> 
-								<a  href="./FeatureForm.html">变更</a>
-							</td>
+							<td><a href="./FeatureDetail.html">查看</a> <a
+								href="./FeatureForm.html">修改</a> <a href="./FeatureForm.html">变更</a></td>
 						</tr>
 						<tr>
 							<td>liukai</td>
-							<td>ESC</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-important">待审核</span></td>
-							<td>
-								<a  href="./SupportDetail.html">查看</a> 
-								<a  href="./SupportForm.html">修改</a>
-							</td>
+							<td><a href="./FeatureDetail.html">查看</a> <a
+								href="./FeatureForm.html">修改</a></td>
 						</tr>
 						<tr>
 							<td>liukai</td>
-							<td>ESC</td>
 							<td>2012-12-08</td>
 							<td><span class="label label-important">待审核</span></td>
-							<td>
-								<a  href="./SupportDetail.html">查看</a> 
-								<a  href="./SupportForm.html">修改</a>
-							</td>
+							<td><a href="./FeatureDetail.html">查看</a> <a
+								href="./FeatureForm.html">修改</a></td>
 						</tr>
-						 
+						<tr>
+							<td>liukai</td>
+							<td>2012-12-08</td>
+							<td><span class="label label-important">待审核</span></td>
+							<td><a href="./FeatureDetail.html">查看</a> <a
+								href="./FeatureForm.html">修改</a></td>
+						</tr>
+						<tr>
+							<td>liukai</td>
+							<td>2012-12-08</td>
+							<td><span class="label label-important">待审核</span></td>
+							<td><a href="./FeatureDetail.html">查看</a> <a
+								href="./FeatureForm.html">修改</a></td>
+						</tr>
+
 
 					</tbody>
 				</table>
 
-				<!-- Pagination -->
-				<div class="pagination pull-right">
-					<ul>
-						<li class="disabled"><a href="#">«</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">»</a></li>
-					</ul>
+				<div class="row">
+					<!-- Pagination -->
+					<div class="pagination pull-right ">
+						<ul>
+							<li class="disabled"><a href="#">«</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">»</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
+
+
 		</div>
 
-			<!-- Footer -->
-			<div id="footer" class="span12">Copyright &copy; 2005-2012</div>
+
+		<!-- Footer -->
+		<div id="footer" class="span12">Copyright &copy; 2005-2012</div>
 
 
 	</div>
