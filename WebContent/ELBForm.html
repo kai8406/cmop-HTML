@@ -173,10 +173,10 @@
 										<label class="control-label">带宽</label>
 										<div class="controls">
 											<label class="radio"> <input type="radio"
-												id="resourceType" value="1" name="resourceType" /> &lt; 250M 
+												id="resourceType" value="1" name="resourceType" /> &lt; 200M 
 											</label> <label class="radio"> <input type="radio"
 												id="resourceType" value="2" name="resourceType"
-												checked="checked" /> &ge; 250M
+												checked="checked" /> &gt; 200M
 											</label>
 										</div>
 									</div>
@@ -193,9 +193,9 @@
 									</colgroup>
 									<thead>
 										<tr>
-											<th>Load Balancer Protocao</th>
+											<th>Load Balancer Protocol</th>
 											<th>Load Balancer Port</th>
-											<th>Instance Protocao</th>
+											<th>Instance Protocol</th>
 											<th>Instance Port</th>
 											<th>Actions</th>
 										</tr>
@@ -231,12 +231,10 @@
 									</tbody>
 
 								</table>
+								
 								<a class="btn" id="mountBtn" data-toggle="modal"
-									href="#mountModal">挂载</a>
+									href="#mountModal">挂载实例</a>
 									<hr>
-									
-
-
 
 									<div id="checkedMounts" class="hidden">
 									<div id="checkedMount" class="row alert ">

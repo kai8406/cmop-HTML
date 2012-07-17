@@ -45,7 +45,7 @@
 			
 			//将选中的实例ID显示在a标签name为mountBtn所在的挂载行中.
 			  $(this).parent().parent().find("tbody #ids:checked").each(function(){
-				 $("a.mountBtn[name='mountBtn']").parent().parent().find("#mountServer").append($(this).val()+"-");
+				 $("a.mountBtn[name='mountBtn']").parent().parent().find("#mountServer").append($(this).val()+"*");
 			  });
 			  
 			  $("a.mountBtn").attr("name","");//将class为mountBtn的a标签name 设置为""
@@ -210,26 +210,17 @@
 											name="dataSorageSpace" /> 50GB
 										</label> <label class="radio inline"> <input type="radio" value="100"
 											name="dataSorageSpace" /> 100GB
-										</label> <label class="radio inline"> <input type="radio" value="200"
-											name="dataSorageSpace" /> 200GB
 										</label> <label class="radio inline"> <input id="otherSpace" type="radio" value=""
 											name="dataSorageSpace" />其它 <input  id="otherSpaceValue" type="text" value=""
 											class="input-mini" />
 										</label>
-									</div>
-								</div>
-								
-								<div class="control-group">
-									<label class="control-label"></label>
-										<div class="controls">
-									 <a class="btn " id="createStorage" >增加</a>			
+										 <a class="btn " id="createStorage" >增加</a>	
 									</div>
 								</div>
 								
 								
-								
-							</fieldset>
 							
+								<hr >
 							
 							<div id="storageAllList" class="span8">
 
@@ -245,6 +236,8 @@
 								</div>
 
 							</div>
+							
+							</fieldset>
 							
 							<hr >
 							<div>
@@ -326,39 +319,39 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>实例ID</th>
+							<th>实例标识符</th>
 							<th>ECS规格</th>
 							<th>创建时间</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input id="ids" type="checkbox" name="ids" value="11111111111" /></td>
-							<td>EDL38ADF9</td>
+							<td><input id="ids" type="checkbox" name="ids" value="ecs-wtg2j6kn" /></td>
+							<td>ecs-wtg2j6kn</td>
 							<td>Small-CPU[单核] Memory[1GB] Disk[20GB]</td>
 							<td>2012/8/6</td>
 						</tr>
 						<tr>
-							<td><input id="ids" type="checkbox" name="ids" value="222222222" /></td>
-							<td>EDL38ADF9</td>
+							<td><input id="ids" type="checkbox" name="ids" value="ecs-TpKBrAFh" /></td>
+							<td>ecs-TpKBrAFh</td>
 							<td>Small-CPU[单核] Memory[1GB] Disk[20GB]</td>
 							<td>2012/8/6</td>
 						</tr>
 						<tr>
-							<td><input id="ids" type="checkbox" name="ids" value="3333333333333"/></td>
-							<td>EDL38ADF9</td>
+							<td><input id="ids" type="checkbox" name="ids" value="ecs-VVPM4v61"/></td>
+							<td>ecs-VVPM4v61</td>
 							<td>Small-CPU[单核] Memory[1GB] Disk[20GB]</td>
 							<td>2012/8/6</td>
 						</tr>
 						<tr>
-							<td><input id="ids" type="checkbox" name="ids" value="44444444444444" /></td>
-							<td>EDL38ADF9</td>
+							<td><input id="ids" type="checkbox" name="ids" value="ecs-IiYz2zz2" /></td>
+							<td>ecs-IiYz2zz2</td>
 							<td>Small-CPU[单核] Memory[1GB] Disk[20GB]</td>
 							<td>2012/8/6</td>
 						</tr>
 						<tr>
-							<td><input id="ids" type="checkbox" name="ids" value="55555555555" /></td>
-							<td>EDL38ADF9</td>
+							<td><input id="ids" type="checkbox" name="ids" value="ecs-Rn2vKjEL" /></td>
+							<td>ecs-Rn2vKjEL</td>
 							<td>Small-CPU[单核] Memory[1GB] Disk[20GB]</td>
 							<td>2012/8/6</td>
 						</tr>
