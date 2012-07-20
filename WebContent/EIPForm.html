@@ -19,9 +19,21 @@
 <script src="jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
 <script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
+<style type="text/css">
+.alert {
+	padding: 8px 35px 8px 14px;
+	margin-bottom: 0px;
+	color: black;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: #fff;
+	border: 1px solid #fff;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+</style>
 <script>
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
 
 				//聚焦指定的Tab
 				$("#support-tab").addClass("active");
@@ -36,46 +48,72 @@
 				$("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
 
 				inputServiceDate();
+				
+				
+				//点击IP生成按钮,当前页面内容保存到列表中,所有信息清空.
+				$("#generateIP").click(function() {
+							//滚动到页头
+							$('html, body').animate({scrollTop : $("#main").offset().top}, 500);
+
+							//清空页面
+							$("input:checkbox[id='isMount']").removeAttr('checked');
+							$("input:checkbox[id='isEFW']").removeAttr('checked');
+							$("input:checkbox[name='networkOperators']").removeAttr('checked');
+							
+							//两个选择按钮状态设置为未选中
+							fIsMount();
+							fIsEFW();
+							//选择按钮下的内容初始化
+							$("#selectECSMount").val("");
+							$(".LB_tr").empty()
+							
+						});
+				
 
 				$("#nextEFW").click(function() {
 
 					$("#instanceAdd").removeClass("hidden");
 				});
 
-				$("#saveLB").live(
-						'click',
-						function() {
+				$("#saveLB").live('click',function() {
 
-							if ($(this).hasClass("disabled")) {
-								$(this).parent().parent().remove();
-							} else {
-								var $tr = $(this).closest('.LB_tr');
-								var $clone = $tr.clone();
-								$clone.find(':text').val(''); //清空文本
-								$tr.after($clone);
-								$(this).removeClass("btn-warning").addClass(
-										"disabled").html("Remove");
-							}
+					if ($(this).hasClass("disabled")) {
+						$(this).parent().parent().remove();
+					} else {
+						var $tr = $(this).closest('.LB_tr');
+						var $clone = $tr.clone();
+						$clone.find(':text').val(''); //清空文本
+						$tr.after($clone);
+						$(this).removeClass("btn-warning").addClass(
+								"disabled").html("Remove");
+					}
 
-						});
+				});
+				
+				
+				
 
-				$("#isMount").click(function() {
+				$("#isMount").live("click", fIsMount);
+				$("#isEFW").live("click", fIsEFW);
+				
+				
+
+				function fIsMount() {
 					if ($("#isMount").is(":checked")) {
 						$("#mountSelect").removeClass("hidden");
 					} else {
 						$("#mountSelect").addClass("hidden");
-
 					}
-				});
+				}
 
-				$("#isEFW").click(function() {
+				function fIsEFW() {
 					if ($("#isEFW").is(":checked")) {
 						$("#EFWSelect").removeClass("hidden");
 					} else {
 						$("#EFWSelect").addClass("hidden");
 
 					}
-				});
+				}
 
 			});
 </script>
@@ -180,17 +218,17 @@
 									<label class="control-label">网络运营商</label>
 									<div class="controls">
 										<label class="checkbox"> <input type="checkbox"
-											value="1" name="resourceType" />中国电信 &nbsp;&nbsp;<code>23.22.139.158</code>
+											value="1" name="networkOperators" />中国电信 &nbsp;&nbsp;<code>23.22.139.158</code>
 										</label> <label class="checkbox"> <input type="checkbox"
-											value="1" name="resourceType" />中国联通 &nbsp;&nbsp;<code>23.21.139.147</code>
+											value="1" name="networkOperators" />中国联通 &nbsp;&nbsp;<code>23.21.139.147</code>
 										</label>
 									</div>
 								</div>
-								
+
 								<hr>
 
-							
-							
+
+
 								<div class="control-group">
 									<label class="control-label">挂靠实例</label>
 
@@ -204,8 +242,8 @@
 
 								<div id="mountSelect" class="control-group hidden">
 									<div class="controls">
-										<select class="input-large">
-											<option></option>
+										<select id="selectECSMount" class="input-large">
+											<option value=""></option>
 											<option value="1">XCSDFSDFA44S</option>
 											<option value="2">WEWESDJJ3LK6</option>
 											<option value="3">1CVBJDFG4546</option>
@@ -216,7 +254,7 @@
 									</div>
 								</div>
 								<hr>
-								
+
 
 
 
@@ -232,73 +270,147 @@
 
 								<div id="EFWSelect" class="hidden">
 
-									 <div class="control-group">
+									<div class="control-group">
 										<label class="control-label">带宽</label>
 										<div class="controls">
 											<label class="radio"> <input type="radio"
-												id="resourceType" value="1" name="resourceType" /> &lt; 200M 
+												id="resourceType" value="1" name="resourceType" /> &lt;
+												200M
 											</label> <label class="radio"> <input type="radio"
 												id="resourceType" value="2" name="resourceType"
 												checked="checked" /> &gt; 200M
 											</label>
 										</div>
 									</div>
-									
 
-								<table id="LB_table"
-									class="table table-bordered table-condensed">
-									<colgroup>
-										<col class="span2">
-										<col class="span2">
-										<col class="span2">
-										<col class="span1">
-										<col class="span2">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>Firewall Protocol</th>
-											<th>Firewall Port</th>
-											<th>Instance Protocol</th>
-											<th>Instance Port</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>HTTP</td>
-											<td>80</td>
-											<td>HTTP</td>
-											<td>80</td>
-											<td><a class="btn disabled" id="saveLB">Remove</a></td>
-										</tr>
-										<tr class="LB_tr">
-											<td><select class="input-medium">
-													<option value="1">HTTP</option>
-													<option value="2">HTTPS</option>
-													<option value="3">TCP</option>
-													<option value="4">SSL</option>
-											</select></td>
-											<td><input type="text" class="input-medium" /></td>
-											<td><select class="input-medium">
-													<option value="1">HTTP</option>
-													<option value="2">HTTPS</option>
-													<option value="3">TCP</option>
-													<option value="4">SSL</option>
-											</select></td>
-											<td><input type="text" class="input-medium" /></td>
-											<td>
-											<a class="btn btn-warning" id="saveLB">Save</a>
-											</td>
-										</tr>
 
-									</tbody>
 
-								</table>
-								
+
+
+									<table id="LB_table"
+										class="table table-bordered table-condensed">
+										<colgroup>
+											<col class="span2">
+											<col class="span2">
+											<col class="span2">
+											<col class="span1">
+											<col class="span2">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>Firewall Protocol</th>
+												<th>Firewall Port</th>
+												<th>Instance Protocol</th>
+												<th>Instance Port</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>HTTP</td>
+												<td>80</td>
+												<td>HTTP</td>
+												<td>80</td>
+												<td><a class="btn disabled" id="saveLB">Remove</a></td>
+											</tr>
+											<tr class="LB_tr">
+												<td><select class="input-medium">
+														<option value="1">HTTP</option>
+														<option value="2">HTTPS</option>
+														<option value="3">TCP</option>
+														<option value="4">SSL</option>
+												</select></td>
+												<td><input type="text" class="input-medium" /></td>
+												<td><select class="input-medium">
+														<option value="1">HTTP</option>
+														<option value="2">HTTPS</option>
+														<option value="3">TCP</option>
+														<option value="4">SSL</option>
+												</select></td>
+												<td><input type="text" class="input-medium" /></td>
+												<td><a class="btn btn-warning" id="saveLB">Save</a></td>
+											</tr>
+
+										</tbody>
+
+									</table>
+
 
 
 								</div>
 
+
+									<div class="control-group">
+									<label class="control-label"></label>
+
+									<div class="controls">
+										<label class="checkbox"> <a id="generateIP"
+											class="btn">继续生成EIP</a>
+										</label>
+									</div>
+								</div>
+								<hr>
+
+
+								<div id="selectedResources">
+									<div id="singleResources" class="row alert">
+										<button data-dismiss="alert" class="close">×</button>
+										<dl class="dl-horizontal">
+											<dt>基本信息:</dt>
+											<dd>
+												中国电信
+												<code>23.22.139.158</code>
+												挂载实例:
+												<code>ECS-DULHXCV</code>
+												带宽 &gt; 200M
+											</dd>
+											<dt>端口关联:</dt>
+											<dd>HTTP 80 &harr; HTTP 80</dd>
+										</dl>
+									</div>
+									<div id="singleResources" class="row alert">
+										<button data-dismiss="alert" class="close">×</button>
+										<dl class="dl-horizontal">
+											<dt>基本信息:</dt>
+											<dd>
+												中国联通
+												<code>23.22.139.158</code>
+												挂载实例:
+												<code>ECS-DULHXCV</code>
+												带宽 &gt; 200M
+											</dd>
+											<dt>端口关联:</dt>
+											<dd>HTTP 80 &harr; HTTP 80</dd>
+										</dl>
+									</div>
+									<div id="singleResources" class="row alert">
+										<button data-dismiss="alert" class="close">×</button>
+										<dl class="dl-horizontal">
+											<dt>基本信息:</dt>
+											<dd>
+												中国联通
+												<code>23.22.139.158</code>
+											</dd>
+										</dl>
+									</div>
+									<div id="singleResources" class="row alert">
+										<button data-dismiss="alert" class="close">×</button>
+										<dl class="dl-horizontal">
+											<dt>基本信息:</dt>
+											<dd>
+												中国电信
+												<code>23.22.139.158</code>
+												挂载实例:
+												<code>ECS-DULHXCV</code>
+												带宽 &lt; 200M
+											</dd>
+											<dt>端口关联:</dt>
+											<dd>HTTP 80 &harr; HTTP 80</dd>
+											<dd>HTTPS 80 &harr; HTTPS 80</dd>
+											<dd>SSL 22 &harr; SSL 23</dd>
+										</dl>
+									</div>
+								</div>
 
 
 
@@ -313,7 +425,7 @@
 							<hr />
 							<div>
 								<a id="backStep" class="btn">返回</a> <a id="nextStep"
-									class="btn btn-info">下一步</a>
+									class="btn btn-info pull-right">下一步</a>
 							</div>
 						</div>
 
