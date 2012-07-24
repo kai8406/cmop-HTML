@@ -33,89 +33,86 @@
 }
 </style>
 <script>
-	$(document).ready(function() {
+$(document).ready(function () {
 
-				//聚焦指定的Tab
-				$("#support-tab").addClass("active");
+    //聚焦指定的Tab
+    $("#support-tab").addClass("active");
 
-				switchTab();
+    switchTab();
 
-				//起始时间
-				$("#serviceStart").datepicker();
-				$("#serviceEnd").datepicker();
+    //起始时间
+    $("#serviceStart").datepicker();
+    $("#serviceEnd").datepicker();
 
-				$("#serviceStart").val(getDateByMonthNum(0)); // 一个月后的日期
-				$("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+    $("#serviceStart").val(getDateByMonthNum(0)); // 一个月后的日期
+    $("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+    inputServiceDate();
 
-				inputServiceDate();
-				
-				
-				//点击IP生成按钮,当前页面内容保存到列表中,所有信息清空.
-				$("#generateIP").click(function() {
-							//滚动到页头
-							$('html, body').animate({scrollTop : $("#main").offset().top}, 500);
 
-							//清空页面
-							$("input:checkbox[id='isMount']").removeAttr('checked');
-							$("input:checkbox[id='isEFW']").removeAttr('checked');
-							$("input:checkbox[name='networkOperators']").removeAttr('checked');
-							
-							//两个选择按钮状态设置为未选中
-							fIsMount();
-							fIsEFW();
-							//选择按钮下的内容初始化
-							$("#selectECSMount").val("");
-							$(".LB_tr").empty()
-							
-						});
-				
+    //点击IP生成按钮,当前页面内容保存到列表中,所有信息清空.
+    $("#generateIP").click(function () {
+        //滚动到页头
+        $('html, body').animate({
+            scrollTop: $("#main").offset().top
+        }, 500);
 
-				$("#nextEFW").click(function() {
+        //清空页面
+        $("input:checkbox[id='isMount']").removeAttr('checked');
+        $("input:checkbox[id='isEFW']").removeAttr('checked');
+        $("input:checkbox[name='networkOperators']").removeAttr('checked');
 
-					$("#instanceAdd").removeClass("hidden");
-				});
+        //两个选择按钮状态设置为未选中
+        fIsMount();
+        fIsEFW();
+        //选择按钮下的内容初始化
+        $("#selectECSMount").val("");
+        $(".LB_tr").empty()
 
-				$("#saveLB").live('click',function() {
+    });
 
-					if ($(this).hasClass("disabled")) {
-						$(this).parent().parent().remove();
-					} else {
-						var $tr = $(this).closest('.LB_tr');
-						var $clone = $tr.clone();
-						$clone.find(':text').val(''); //清空文本
-						$tr.after($clone);
-						$(this).removeClass("btn-warning").addClass(
-								"disabled").html("Remove");
-					}
 
-				});
-				
-				
-				
+    $("#nextEFW").click(function () {
 
-				$("#isMount").live("click", fIsMount);
-				$("#isEFW").live("click", fIsEFW);
-				
-				
+        $("#instanceAdd").removeClass("hidden");
+    });
 
-				function fIsMount() {
-					if ($("#isMount").is(":checked")) {
-						$("#mountSelect").removeClass("hidden");
-					} else {
-						$("#mountSelect").addClass("hidden");
-					}
-				}
 
-				function fIsEFW() {
-					if ($("#isEFW").is(":checked")) {
-						$("#EFWSelect").removeClass("hidden");
-					} else {
-						$("#EFWSelect").addClass("hidden");
 
-					}
-				}
+    $("#isMount").on("click", fIsMount);
+    $("#isEFW").on("click", fIsEFW);
 
-			});
+
+
+    function fIsMount() {
+        if ($("#isMount").is(":checked")) {
+            $("#mountSelect").removeClass("hidden");
+        } else {
+            $("#mountSelect").addClass("hidden");
+        }
+    }
+
+    function fIsEFW() {
+        if ($("#isEFW").is(":checked")) {
+            $("#EFWSelect").removeClass("hidden");
+        } else {
+            $("#EFWSelect").addClass("hidden");
+
+        }
+    }
+
+});
+
+$(document).on("click", "#saveLB", function () {
+    if ($(this).hasClass("disabled")) {
+        $(this).parent().parent().remove();
+    } else {
+        var $tr = $(this).closest('.LB_tr');
+        var $clone = $tr.clone();
+        $clone.find(':text').val(''); //清空文本
+        $tr.after($clone);
+        $(this).removeClass("btn-warning").addClass("disabled").html("Remove");
+    }
+});
 </script>
 
 </head>

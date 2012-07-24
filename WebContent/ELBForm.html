@@ -34,46 +34,39 @@
 </style>
 
 <script>
-	$(document).ready(
-			function() {
+$(document).ready(function () {
 
-				//聚焦指定的Tab
-				$("#support-tab").addClass("active");
+    //聚焦指定的Tab
+    $("#support-tab").addClass("active");
 
-				switchTab();
+    switchTab();
 
-				//起始时间
-				$("#serviceStart").datepicker();
-				$("#serviceEnd").datepicker();
+    //起始时间
+    $("#serviceStart").datepicker();
+    $("#serviceEnd").datepicker();
 
-				$("#serviceStart").val(getDateByMonthNum(0)); // 一个月后的日期
-				$("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+    $("#serviceStart").val(getDateByMonthNum(0)); // 一个月后的日期
+    $("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+    inputServiceDate();
 
-				inputServiceDate();
+    $("#modalSave").click(function () {
+        $("#checkedMounts").removeClass("hidden");
+    });
 
-				$("#saveLB").live(
-						'click',
-						function() {
+});
 
-							if ($(this).hasClass("disabled")) {
-								$(this).parent().parent().remove();
-							} else {
-								var $tr = $(this).closest('.LB_tr');
-								var $clone = $tr.clone();
-								$clone.find(':text').val(''); //清空文本
-								$tr.after($clone);
-								$(this).removeClass("btn-warning").addClass(
-										"disabled").html("Remove");
-							}
 
-						});
-				
-				
-				$("#modalSave").click(function(){
-					$("#checkedMounts").removeClass("hidden");
-				});
-
-			});
+$(document).on("click", "#saveLB", function () {
+    if ($(this).hasClass("disabled")) {
+        $(this).parent().parent().remove();
+    } else {
+        var $tr = $(this).closest('.LB_tr');
+        var $clone = $tr.clone();
+        $clone.find(':text').val(''); //清空文本
+        $tr.after($clone);
+        $(this).removeClass("btn-warning").addClass("disabled").html("Remove");
+    }
+});
 </script>
 
 </head>
