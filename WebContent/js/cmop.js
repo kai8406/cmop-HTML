@@ -157,8 +157,14 @@ function switchTab() {
 
     var nextSteps = $("a[id^='nextStep']");
     nextSteps.click(function () {
+    	
+    	var nextIndex = nextSteps.index(this);
+    	
+    	$(".step:eq("+nextIndex+")").removeClass("show").addClass("hidden");
+    	$(".step:eq("+(nextIndex+1)+")").removeClass("hidden").addClass("show");
+    	 
 
-        $('#myTab li:eq(' + (nextSteps.index(this) + 1) + ') a').tab('show');
+        $('#myTab li:eq(' + (nextIndex + 1) + ') a').tab('show');
         displayInputParameter();
 
         //
@@ -204,6 +210,12 @@ function switchTab() {
 
     var backSteps = $("a[id^='backStep']");
     backSteps.click(function () {
+    	
+    	var backIndex = backSteps.index(this);
+    	
+    	$(".step:eq("+backIndex+")").removeClass("hidden").addClass("show");
+    	$(".step:eq("+(backIndex+1)+")").removeClass("show").addClass("hidden");
+    	 
 
         $('#myTab li:eq(' + backSteps.index(this) + ') a').tab('show'); // Select 1 tab (0-indexed)
         displayInputParameter();

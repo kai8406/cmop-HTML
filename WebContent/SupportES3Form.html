@@ -33,114 +33,80 @@
 <script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
 <script>
-	$(document)
-			.ready(
-					function() {
+$(document).ready(function () {
 
-						//聚焦指定的Tab
-						$("#support-tab").addClass("active");
+		    //聚焦指定的Tab
+		    $("#support-tab").addClass("active");
 
-						//点击modal确定按钮
-						$("#modalSave")
-								.click(
-										function() {
-											//清空
-											$("a.mountBtn[name='mountBtn']")
-													.parent().parent().find(
-															"#mountServer")
-													.empty();
+		    //点击modal确定按钮
+		    $("#modalSave").click(
 
-											//将选中的实例ID显示在a标签name为mountBtn所在的挂载行中.
-											$(this)
-													.parent()
-													.parent()
-													.find("tbody #ids:checked")
-													.each(
-															function() {
-																$(
-																		"a.mountBtn[name='mountBtn']")
-																		.parent()
-																		.parent()
-																		.find(
-																				"#mountServer")
-																		.append(
-																				$(
-																						this)
-																						.val()
-																						+ "*");
-															});
+		    function () {
+		        //清空
+		        $("a.mountBtn[name='mountBtn']").parent().parent().find("#mountServer").empty();
 
-											$("a.mountBtn").attr("name", "");//将class为mountBtn的a标签name 设置为""
-										});
+		        //将选中的实例ID显示在a标签name为mountBtn所在的挂载行中.
+		        $(this).parent().parent().find("tbody #ids:checked").each(
 
-						$("#mountBtn").live(
-								"click",
-								function() {
-									//设置class 包含mountBtn的a标签name为指定的值用于区分哪个存储空间执行挂载
+		        function () {
+		            $("a.mountBtn[name='mountBtn']").parent().parent().find("#mountServer").append(
+		            $(
+		            this).val() + "*");
+		        });
 
-									$("a.mountBtn").attr("name", "");//将class为mountBtn的a标签name 设置为""
+		        $("a.mountBtn").attr("name", ""); //将class为mountBtn的a标签name 设置为""
+		    });
 
-									$(this).attr("name", "mountBtn");
+		    $("#mountBtn").live("click", function () {
+		        //设置class 包含mountBtn的a标签name为指定的值用于区分哪个存储空间执行挂载
+		        $("a.mountBtn").attr("name", ""); //将class为mountBtn的a标签name 设置为""
+		        $(this).attr("name", "mountBtn");
 
-									//默认清空checkbox
-									$("input:checkbox[name='ids']").removeAttr(
-											'checked');
+		        //默认清空checkbox
+		        $("input:checkbox[name='ids']").removeAttr('checked');
 
-								});
+		    });
 
-						switchTab();
+		    switchTab();
 
-						//起始时间
-						$("#serviceStart").datepicker();
-						$("#serviceEnd").datepicker();
+		    //起始时间
+		    $("#serviceStart").datepicker();
+		    $("#serviceEnd").datepicker();
 
-						$("#serviceStart").val(getDateByMonthNum(0)); // 一个月后的日期
-						$("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+		    $("#serviceStart").val(getDateByMonthNum(0)); // 一个月后的日期
+		    $("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+		    inputServiceDate();
 
-						inputServiceDate();
+		    $("#createStorage").click(function () {
 
-						$("#createStorage")
-								.click(
-										function() {
+		        /*存储资源*/
+		        if ($("#otherSpace").is(":checked")) {
+		            $("#otherSpace").val(
+		            $("#otherSpaceValue").val());
 
-											/*存储资源*/
-											if ($("#otherSpace").is(":checked")) {
-												$("#otherSpace").val(
-														$("#otherSpaceValue")
-																.val());
+		            $("#otherSpaceValue").focusout(
 
-												$("#otherSpaceValue")
-														.focusout(
-																function() {
-																	$(
-																			"#otherSpace")
-																			.val(
-																					$(
-																							"#otherSpaceValue")
-																							.val());
-																});
-											}
+		            function () {
+		                $("#otherSpace").val(
+		                $("#otherSpaceValue").val());
+		            });
+		        }
 
-											var dataSorageSpace = $(
-													"input[name='dataSorageSpace']:checked")
-													.val();
+		        var dataSorageSpace = $("input[name='dataSorageSpace']:checked").val();
 
-											//插入挂载行
-											str = "<div class='row alert' id='storageList'>";
-											str += "<div class='span1' id='space'>"
-													+ dataSorageSpace
-													+ "&nbsp;GB</div>";
-											str += "<div class='hidden' id='space_value'>"
-													+ dataSorageSpace
-													+ "</div>";
-											str += "<div class='span1 '><a id='mountBtn' name='' class='btn btn-warning mountBtn' data-toggle='modal' href='#es3Modal'>挂载</a></div>";
-											str += "<div id='mountServer' class='span4'></div>";
-											str += "<button class='close' id='removeStorage' data-dismiss='alert'>&times;</button></div>";
-											$("#storageAllList").append(str);
+		        //插入挂载行
+		        str = "<div class='row alert' id='storageList'>";
+		        str += "<div class='span1' id='space'>" + dataSorageSpace + "&nbsp;GB</div>";
+		        str += "<div class='hidden' id='space_value'>" + dataSorageSpace + "</div>";
+		        str += "<div class='span1 '><a id='mountBtn' name='' class='btn btn-warning mountBtn' data-toggle='modal' href='#es3Modal'>挂载</a></div>";
+		        str += "<div id='mountServer' class='span4'></div>";
+		        str += "<button class='close' id='removeStorage' data-dismiss='alert'>&times;</button></div>";
+		        $("#storageAllList").append(str);
 
-										});
+		    });
+		    
 
-					});
+		});
 </script>
 
 </head>
@@ -179,8 +145,28 @@
 				</div>
 			</div>
 
-			<div id="main" class="span10">
+			<div id="main" class="span10" >
+			
+				<div class="step">
+					<img alt="" src="./img/stepCurrent.png">
+					<img alt=""	src="./img/step.png">
+					<img alt="" src="./img/stepEnd.png">
+				</div>
+
+				<div class="step hidden">
+					<img alt="" src="./img/stepOver.png">
+					<img alt=""	src="./img/stepCurrent.png">
+					<img alt=""	src="./img/stepEnd.png">
+				</div>
+
+				<div class="step hidden">
+					<img alt="" src="./img/stepOver.png">
+					<img alt=""	src="./img/stepOver.png">
+					<img alt=""	src="./img/stepLast.png">
+				</div>
+
 				<form action="./SupportList.html" class="form-horizontal">
+
 
 					<div class="tab-content">
 
@@ -210,10 +196,10 @@
 										<div class="input-append">
 											<input type="text" size="16" id="serviceStart"
 												name="serviceStart" readonly="readonly" class="input-medium" />
-												<input type="text" size="16" id="serviceEnd"
+											<input type="text" size="16" id="serviceEnd"
 												name="serviceEnd" readonly="readonly" class="input-medium" />
 										</div>
-									</div> 
+									</div>
 
 								</div>
 
