@@ -181,14 +181,12 @@ $(document).on("click", "#saveLB", function () {
 										<col class="span2">
 										<col class="span2">
 										<col class="span2">
-										<col class="span1">
 										<col class="span2">
 									</colgroup>
 									<thead>
 										<tr>
 											<th>Load Balancer Protocol</th>
 											<th>Load Balancer Port</th>
-											<th>Instance Protocol</th>
 											<th>Instance Port</th>
 											<th>Actions</th>
 										</tr>
@@ -197,7 +195,6 @@ $(document).on("click", "#saveLB", function () {
 										<tr>
 											<td>HTTP</td>
 											<td>80</td>
-											<td>HTTP</td>
 											<td>80</td>
 											<td><a class="btn disabled" id="saveLB">Remove</a></td>
 										</tr>
@@ -209,12 +206,6 @@ $(document).on("click", "#saveLB", function () {
 													<option value="4">SSL</option>
 											</select></td>
 											<td><input type="text" class="input-medium" /></td>
-											<td><select class="input-medium">
-													<option value="1">HTTP</option>
-													<option value="2">HTTPS</option>
-													<option value="3">TCP</option>
-													<option value="4">SSL</option>
-											</select></td>
 											<td><input type="text" class="input-medium" /></td>
 											<td>
 											<a class="btn btn-warning" id="saveLB">Save</a>

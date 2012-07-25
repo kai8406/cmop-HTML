@@ -57,61 +57,13 @@ $(document).ready(function () {
         }, 500);
 
         //清空页面
-        $("input:checkbox[id='isMount']").removeAttr('checked');
-        $("input:checkbox[id='isEFW']").removeAttr('checked');
         $("input:checkbox[name='networkOperators']").removeAttr('checked');
-
-        //两个选择按钮状态设置为未选中
-        fIsMount();
-        fIsEFW();
-        //选择按钮下的内容初始化
         $("#selectECSMount").val("");
-        $(".LB_tr").empty()
 
     });
 
 
-    $("#nextEFW").click(function () {
 
-        $("#instanceAdd").removeClass("hidden");
-    });
-
-
-
-    $("#isMount").on("click", fIsMount);
-    $("#isEFW").on("click", fIsEFW);
-
-
-
-    function fIsMount() {
-        if ($("#isMount").is(":checked")) {
-            $("#mountSelect").removeClass("hidden");
-        } else {
-            $("#mountSelect").addClass("hidden");
-        }
-    }
-
-    function fIsEFW() {
-        if ($("#isEFW").is(":checked")) {
-            $("#EFWSelect").removeClass("hidden");
-        } else {
-            $("#EFWSelect").addClass("hidden");
-
-        }
-    }
-
-});
-
-$(document).on("click", "#saveLB", function () {
-    if ($(this).hasClass("disabled")) {
-        $(this).parent().parent().remove();
-    } else {
-        var $tr = $(this).closest('.LB_tr');
-        var $clone = $tr.clone();
-        $clone.find(':text').val(''); //清空文本
-        $tr.after($clone);
-        $(this).removeClass("btn-warning").addClass("disabled").html("Remove");
-    }
 });
 </script>
 
@@ -160,7 +112,7 @@ $(document).on("click", "#saveLB", function () {
 						<div class="tab-pane fade in active span6" id="profile1">
 							<fieldset>
 								<legend>EIP申请</legend>
-
+								
 								<div class="control-group">
 									<label class="control-label">资源类型</label>
 									<div class="controls">
@@ -203,41 +155,43 @@ $(document).on("click", "#saveLB", function () {
 
 						<!-- 第2步 -->
 						<div class="tab-pane fade span9" id="profile2">
-
-
-
 							<fieldset>
 								<legend>EIP </legend>
-
-
-
-								<div class="control-group">
-									<label class="control-label">网络运营商</label>
-									<div class="controls">
-										<label class="checkbox"> <input type="checkbox"
-											value="1" name="networkOperators" />中国电信 &nbsp;&nbsp;<code>23.22.139.158</code>
-										</label> <label class="checkbox"> <input type="checkbox"
-											value="1" name="networkOperators" />中国联通 &nbsp;&nbsp;<code>23.21.139.147</code>
-										</label>
+								
+								<div class="row">
+									<div class="span4">
+										<fieldset>
+											<legend><label class="checkbox inline"><input type="checkbox"	value="1" name="networkOperators" /></label><small>中国电信</small></legend>
+												<div class="control-group">
+													<label class="control-label">公网IP</label>
+													<div class="controls"><code>23.22.139.158</code></div>
+												</div>
+												<div class="control-group">
+													<label class="control-label">DNS域名</label>
+													<div class="controls"><input type="text" id="ip" name="ip"	value="" class="input-medium" /></div>
+												</div>
+										</fieldset>
+									</div>
+									<div class="span4">
+										<fieldset>
+											<legend><label class="checkbox inline"><input type="checkbox"	value="2" name="networkOperators" /></label><small>中国联通</small></legend>
+												<div class="control-group">
+													<label class="control-label">公网IP</label>
+													<div class="controls"><code>23.22.139.158</code></div>
+												</div>
+												<div class="control-group">
+													<label class="control-label">DNS域名</label>
+													<div class="controls"><input type="text" id="ip" name="ip"	value="" class="input-medium" /></div>
+												</div>
+										</fieldset>
 									</div>
 								</div>
 
 								<hr>
 
-
-
 								<div class="control-group">
 									<label class="control-label">挂靠实例</label>
 
-									<div class="controls">
-										<label class="checkbox"> <input type="checkbox"
-											value="" name="" id="isMount" />
-										</label>
-									</div>
-								</div>
-
-
-								<div id="mountSelect" class="control-group hidden">
 									<div class="controls">
 										<select id="selectECSMount" class="input-large">
 											<option value=""></option>
@@ -250,92 +204,6 @@ $(document).on("click", "#saveLB", function () {
 										</select>
 									</div>
 								</div>
-								<hr>
-
-
-
-
-								<div class="control-group">
-									<label class="control-label">关联EFW</label>
-
-									<div class="controls">
-										<label class="checkbox"> <input type="checkbox"
-											value="" name="" id="isEFW" />
-										</label>
-									</div>
-								</div>
-
-								<div id="EFWSelect" class="hidden">
-
-									<div class="control-group">
-										<label class="control-label">带宽</label>
-										<div class="controls">
-											<label class="radio"> <input type="radio"
-												id="resourceType" value="1" name="resourceType" /> &lt;
-												200M
-											</label> <label class="radio"> <input type="radio"
-												id="resourceType" value="2" name="resourceType"
-												checked="checked" /> &gt; 200M
-											</label>
-										</div>
-									</div>
-
-
-
-
-
-									<table id="LB_table"
-										class="table table-bordered table-condensed">
-										<colgroup>
-											<col class="span2">
-											<col class="span2">
-											<col class="span2">
-											<col class="span1">
-											<col class="span2">
-										</colgroup>
-										<thead>
-											<tr>
-												<th>Firewall Protocol</th>
-												<th>Firewall Port</th>
-												<th>Instance Protocol</th>
-												<th>Instance Port</th>
-												<th>Actions</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>HTTP</td>
-												<td>80</td>
-												<td>HTTP</td>
-												<td>80</td>
-												<td><a class="btn disabled" id="saveLB">Remove</a></td>
-											</tr>
-											<tr class="LB_tr">
-												<td><select class="input-medium">
-														<option value="1">HTTP</option>
-														<option value="2">HTTPS</option>
-														<option value="3">TCP</option>
-														<option value="4">SSL</option>
-												</select></td>
-												<td><input type="text" class="input-medium" /></td>
-												<td><select class="input-medium">
-														<option value="1">HTTP</option>
-														<option value="2">HTTPS</option>
-														<option value="3">TCP</option>
-														<option value="4">SSL</option>
-												</select></td>
-												<td><input type="text" class="input-medium" /></td>
-												<td><a class="btn btn-warning" id="saveLB">Save</a></td>
-											</tr>
-
-										</tbody>
-
-									</table>
-
-
-
-								</div>
-
 
 									<div class="control-group">
 									<label class="control-label"></label>
@@ -359,34 +227,8 @@ $(document).on("click", "#saveLB", function () {
 												<code>23.22.139.158</code>
 												挂载实例:
 												<code>ECS-DULHXCV</code>
-												带宽 &gt; 200M
-											</dd>
-											<dt>端口关联:</dt>
-											<dd>HTTP 80 &harr; HTTP 80</dd>
-										</dl>
-									</div>
-									<div id="singleResources" class="row alert">
-										<button data-dismiss="alert" class="close">×</button>
-										<dl class="dl-horizontal">
-											<dt>基本信息:</dt>
-											<dd>
-												中国联通
-												<code>23.22.139.158</code>
-												挂载实例:
-												<code>ECS-DULHXCV</code>
-												带宽 &gt; 200M
-											</dd>
-											<dt>端口关联:</dt>
-											<dd>HTTP 80 &harr; HTTP 80</dd>
-										</dl>
-									</div>
-									<div id="singleResources" class="row alert">
-										<button data-dismiss="alert" class="close">×</button>
-										<dl class="dl-horizontal">
-											<dt>基本信息:</dt>
-											<dd>
-												中国联通
-												<code>23.22.139.158</code>
+												DNS域名:
+												<code>www.google.com</code>
 											</dd>
 										</dl>
 									</div>
@@ -399,20 +241,41 @@ $(document).on("click", "#saveLB", function () {
 												<code>23.22.139.158</code>
 												挂载实例:
 												<code>ECS-DULHXCV</code>
-												带宽 &lt; 200M
+												DNS域名:
+												<code>www.google.com</code>
 											</dd>
-											<dt>端口关联:</dt>
-											<dd>HTTP 80 &harr; HTTP 80</dd>
-											<dd>HTTPS 80 &harr; HTTPS 80</dd>
-											<dd>SSL 22 &harr; SSL 23</dd>
 										</dl>
 									</div>
+									<div id="singleResources" class="row alert">
+										<button data-dismiss="alert" class="close">×</button>
+										<dl class="dl-horizontal">
+											<dt>基本信息:</dt>
+											<dd>
+												中国电信
+												<code>23.22.139.158</code>
+												挂载实例:
+												<code>ECS-DULHXCV</code>
+												DNS域名:
+												<code>www.google.com</code>
+											</dd>
+										</dl>
+									</div>
+									<div id="singleResources" class="row alert">
+										<button data-dismiss="alert" class="close">×</button>
+										<dl class="dl-horizontal">
+											<dt>基本信息:</dt>
+											<dd>
+												中国电信
+												<code>23.22.139.158</code>
+												挂载实例:
+												<code>ECS-DULHXCV</code>
+												DNS域名:
+												<code>www.google.com</code>
+											</dd>
+										</dl>
+									</div>
+									 
 								</div>
-
-
-
-
-
 
 							</fieldset>
 
