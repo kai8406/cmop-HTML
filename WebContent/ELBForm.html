@@ -7,6 +7,7 @@
 <link href="css/cmop.css" rel="stylesheet">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/jquery.slider.min.css" rel="stylesheet">
 <link href="jquery-ui/css/overcast/jquery-ui-1.8.21.custom.css"
 	rel="stylesheet">
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -15,6 +16,7 @@
     <![endif]-->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slider.min.js"></script>
 <script src="js/cmop.js"></script>
 <script src="jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
 <script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
@@ -36,6 +38,9 @@
 <script>
 $(document).ready(function () {
 
+	 $("#Slider").slider({scale: [1,2,3,4,5,6,7,8,9,10], dimension: '', skin: "blue" });
+	 $("#Slider2").slider({scale: [1,2,3,4,5,6,7,8,9,10], dimension: '', skin: "blue" });
+	
     //聚焦指定的Tab
     $("#support-tab").addClass("active");
 
@@ -54,6 +59,7 @@ $(document).ready(function () {
     });
 
 });
+
 
 
 $(document).on("click", "#saveLB", function () {
@@ -100,7 +106,8 @@ $(document).on("click", "#saveLB", function () {
 					<ul class="nav nav-tabs" id="myTab">
 						<li class="active"><a href="#profile1" data-toggle="tab">1.ELB申请</a></li>
 						<li><a href="#profile2" data-toggle="tab">2.ELB</a></li>
-						<li><a href="#profile3" data-toggle="tab">3.提交</a></li>
+						<li><a href="#profile3" data-toggle="tab">3.ELB其它设置</a></li>
+						<li><a href="#profile4" data-toggle="tab">4.提交</a></li>
 					</ul>
 				</div>
 			</div>
@@ -157,8 +164,6 @@ $(document).on("click", "#saveLB", function () {
 
 						<!-- 第2步 -->
 						<div class="tab-pane fade span9 " id="profile2">
-
-
 							<fieldset>
 								<legend>ELB </legend>
 
@@ -317,9 +322,45 @@ $(document).on("click", "#saveLB", function () {
 									class="btn btn-info">下一步</a>
 							</div>
 						</div>
+						
+						<!-- 第3步 -->
+						<div class="tab-pane fade span9 " id="profile3">
+							<fieldset>
+								<legend>ELB </legend>
+							
+							<div class="control-group">
+								<label class="control-label">Unhealthy Threshold</label>
+								<div class="controls">
+									<div class="layout-slider span3">
+							    		 <input id="Slider" type="slider" name="price" value="1" /> 
+							   		</div>
+								 </div>
+							</div>
+							
+							<div class="control-group">
+								<label class="control-label">Healthy Threshold</label>
+								<div class="controls">
+									<div class="layout-slider span3">
+							    		 <input id="Slider2" type="slider" name="area" value="10" /> 
+							   		</div>
+								 </div>
+							</div>
+							
+							
+							
+								
+								 
+							</fieldset>
+
+							<hr />
+							<div>
+								<a id="backStep" class="btn">返回</a> <a id="nextStep"
+									class="btn btn-info">下一步</a>
+							</div>
+						</div>
 
 						<!-- 第3步 -->
-						<div class="tab-pane fade span8" id="profile3">
+						<div class="tab-pane fade span8" id="profile4">
 							<fieldset>
 								<legend>ELB申请详情</legend>
 
