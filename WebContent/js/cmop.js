@@ -162,7 +162,6 @@ function switchTab() {
     	
     	$(".step:eq("+nextIndex+"),.stepContext:eq("+nextIndex+")").removeClass("show").addClass("hidden");
     	$(".step:eq("+(nextIndex+1)+"),.stepContext:eq("+(nextIndex+1)+")").removeClass("hidden").addClass("show");
-    	
     	 
 
         $('#myTab li:eq(' + (nextIndex + 1) + ') a').tab('show');

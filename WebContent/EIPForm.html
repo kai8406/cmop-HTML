@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -61,9 +61,17 @@ $(document).ready(function () {
         $("#selectECSMount").val("");
 
     });
-
-
-
+});
+$(document).on("click", "#saveLB", function () {
+    if ($(this).hasClass("disabled")) {
+        $(this).parent().parent().remove();
+    } else {
+        var $tr = $(this).closest('.LB_tr');
+        var $clone = $tr.clone();
+        $clone.find(':text').val(''); //清空文本
+        $tr.after($clone);
+        $(this).removeClass("btn-warning").addClass("disabled").html("Remove");
+    }
 });
 </script>
 
@@ -188,22 +196,58 @@ $(document).ready(function () {
 								</div>
 
 								<hr>
+								
+								<fieldset>
+									<legend>端口映射</legend>
+								
+								
+								<table id="LB_table"
+									class="table table-bordered table-condensed">
+									<colgroup>
+										<col class="span1">
+										<col class="span1">
+										<col class="span2">
+										<col class="span1">
+										<col class="span3">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>Protocol</th>
+											<th>Port</th>
+											<th>Instance</th>
+											<th>Instance Port</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="LB_tr">
+											<td><select class="input-medium">
+													<option value="1">HTTP</option>
+													<option value="2">HTTPS</option>
+													<option value="3">TCP</option>
+													<option value="4">SSL</option>
+											</select></td>
+											<td><input type="text" class="input-medium"></td>
+											<td><select id="selectECSMount" class="input-large">
+													<option value=""></option>
+													<option value="1">XCSDFSDFA44S</option>
+													<option value="2">WEWESDJJ3LK6</option>
+													<option value="3">1CVBJDFG4546</option>
+													<option value="4">NGHJAFHEF676</option>
+													<option value="5">906GHJGHJDRG</option>
+													<option value="6">DJ67U235YHJM</option>
+											</select></td>
+											<td><input type="text" class="input-medium"></td>
+											<td><a id="saveLB" class="btn btn-warning">Save</a></td>
+										</tr>
 
-								<div class="control-group">
-									<label class="control-label">挂靠实例</label>
+									</tbody>
 
-									<div class="controls">
-										<select id="selectECSMount" class="input-large">
-											<option value=""></option>
-											<option value="1">XCSDFSDFA44S</option>
-											<option value="2">WEWESDJJ3LK6</option>
-											<option value="3">1CVBJDFG4546</option>
-											<option value="4">NGHJAFHEF676</option>
-											<option value="5">906GHJGHJDRG</option>
-											<option value="6">DJ67U235YHJM</option>
-										</select>
-									</div>
-								</div>
+								</table>
+								
+								</fieldset>
+								
+ 
 
 									<div class="control-group">
 									<label class="control-label"></label>
@@ -214,6 +258,8 @@ $(document).ready(function () {
 										</label>
 									</div>
 								</div>
+								
+								
 								<hr>
 
 
@@ -227,65 +273,17 @@ $(document).ready(function () {
 												<code>23.22.139.158</code>
 												DNS域名:
 												<code>www.google.com</code>
-												挂载实例:
-												<code>ECS-DULHXCV</code>
 											</dd>
-										</dl>
-									</div>
-									<div id="singleResources" class="row alert">
-										<button data-dismiss="alert" class="close">×</button>
-										<dl class="dl-horizontal">
-											<dt>基本信息:</dt>
 											<dd>
-												中国电信
+												中国联通
 												<code>23.22.139.158</code>
 												DNS域名:
 												<code>www.google.com</code>
-												挂载实例:
-												<code>ECS-DULHXCV</code>
 											</dd>
-										</dl>
-									</div>
-									<div id="singleResources" class="row alert">
-										<button data-dismiss="alert" class="close">×</button>
-										<dl class="dl-horizontal">
-											<dt>基本信息:</dt>
-											<dd>
-												中国电信
-												<code>23.22.139.158</code>
-												DNS域名:
-												<code>www.google.com</code>
-												挂载实例:
-												<code>ECS-DULHXCV</code>
-											</dd>
-										</dl>
-									</div>
-									<div id="singleResources" class="row alert">
-										<button data-dismiss="alert" class="close">×</button>
-										<dl class="dl-horizontal">
-											<dt>基本信息:</dt>
-											<dd>
-												中国电信
-												<code>23.22.139.158</code>
-												DNS域名:
-												<code>www.google.com</code>
-												挂载实例:
-												<code>ECS-DULHXCV</code>
-											</dd>
-										</dl>
-									</div>
-									<div id="singleResources" class="row alert">
-										<button data-dismiss="alert" class="close">×</button>
-										<dl class="dl-horizontal">
-											<dt>基本信息:</dt>
-											<dd>
-												中国电信
-												<code>23.22.139.158</code>
-												DNS域名:
-												<code>www.google.com</code>
-												挂载实例:
-												<code>ECS-DULHXCV</code>
-											</dd>
+											<dt>端口映射:</dt>
+											<dd> Protocol <code>HTTP</code> Port <code>80</code> &harr; Instance<code>WEWESDJJ3LK6</code> Instance Port <code>8080</code></dd>
+											<dd> Protocol <code>HTTP</code> Port <code>80</code> &harr; Instance<code>WEWESDJJ3LK6</code> Instance Port <code>8080</code></dd>
+											<dd> Protocol <code>HTTP</code> Port <code>80</code> &harr; Instance<code>WEWESDJJ3LK6</code> Instance Port <code>8080</code></dd>
 										</dl>
 									</div>
 									 
