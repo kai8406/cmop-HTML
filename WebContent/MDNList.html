@@ -19,10 +19,8 @@
 	$(document).ready(function() {
 		//聚焦指定的Tab
 		$("#support-tab").addClass("active");
-		
-		$("#efw-bar").addClass("active");
-		$("#efw--icon").addClass("icon-white");
-		
+		 
+		$("#mdn-bar").addClass("active").find("i").addClass("icon-white");
 	});
 </script>
 
@@ -53,25 +51,32 @@
 		<div class="row">
 			<div id="leftbar" class="span2">
 				<ul class="nav nav-list">
-					<li class="nav-header">计算资源</li>
-					<li id="ecs-bar"><a href="./ECSList.html"><i id="ecs-icon" class="icon-hdd"></i>ECS</a></li>
+					<li class="nav-header">我的申请</li>
+					<li id="all-bar"><a href="./ECSList.html"><i id="all-icon" class="icon-hdd"></i>All</a></li>
 					<li class="divider"></li>
-					<li class="nav-header">存储资源</li>
+					<li class="nav-header">基础架构服务</li>
+					<li id="pcs-bar"><a href="./PCSList.html"><i id="pcs-icon" class="icon-retweet"></i>PCS</a></li>
+					<li id="ecs-bar"><a href="./ECSList.html"><i id="ecs-icon" class="icon-retweet"></i>ECS</a></li>
 					<li id="es3-bar"><a href="./ES3List.html"><i id="es3-icon" class="icon-inbox"></i>ES3</a></li>
-					<li class="divider"></li>
-					<li class="nav-header">网络资源</li>
 					<li id="eip-bar"><a href="./EIPList.html"><i id="eip-icon" class="icon-file"></i>EIP</a></li>
-					<li id="efw-bar"><a href="./EFWList.html"><i id="efw-icon" class="icon-retweet"></i>EFW</a></li>
 					<li id="elb-bar"><a href="./ELBList.html"><i id="elb-icon" class="icon-cog"></i>ELB</a></li>
+					<li id="esg-bar"><a href="#"><i id="esg-icon" class="icon-cog"></i>ESG</a></li>
 					<li class="divider"></li>
-					<li class="nav-header">自定义申请</li>
-					<li><a href="#"><i class="icon-user"></i> Profile</a></li>
+					<li class="nav-header">平台服务</li>
+					<li id="mdn-bar"><a href="./MDNList.html"><i id="mdn-icon" class="icon-user"></i>MDN</a></li>
+					<li id="media-bar"><a href="./MediaList.html"><i id="media-icon" class="icon-user"></i>媒体处理</a></li>
+					<li id="content-bar"><a href="./contentList.html"><i id="content-icon" class="icon-user"></i>内容仓库</a></li>
 					<li class="divider"></li>
+					<li class="nav-header">软件服务</li>
+					<li id="bsp-bar"><a href="./BSPList.html"><i id="mdn-con" class="icon-user"></i>BSP</a></li>
+					<li><a href="#"><i class="icon-user"></i>数据加工</a></li>
+					<li><a href="#"><i class="icon-user"></i>拆条</a></li>
+					<li><a href="#"><i class="icon-user"></i>编目</a></li>
 				</ul>
 			</div>
 
 			<div id="main" class="span10">
-				<a class="btn btn-info pager" href="./EFWForm.html">Create EFW</a>
+				<a class="btn btn-info pager" href="./MDNForm.html">Create MDN</a>
 
 				<!-- Search -->
 				<form class="well well-small form-search"
