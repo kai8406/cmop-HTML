@@ -20,16 +20,50 @@
 <script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
 <script>
-$(document).ready(function () {
+	$(document).ready(function() {
 
-		    //聚焦指定的Tab
-		    $("#support-tab").addClass("active");
+		//聚焦指定的Tab
+		$("#support-tab").addClass("active");
 
-		    switchTab();
-		    
-			$("#mdn-bar").addClass("active").find("i").addClass("icon-white");
+		switchTab();
 
-		});
+		$("#mdn-bar").addClass("active").find("i").addClass("icon-white");
+
+	});
+
+	$(document).on("click", "#page-speed #addSpeed", function() {
+		var $div = $(this).parent().parent();
+		var $clone = $div.clone();
+		$clone.find(':text').val(''); //清空文本
+		$div.after($clone);
+	});
+	
+	$(document).on("click", "#page-speed #deleteSpeed", function() {
+		 if($("fieldset #page-speed").length == 1){
+			 alert("至少要一个!");
+			 return false;
+		 }
+		 $(this).parent().parent().remove();
+	});
+	
+	$(document).on("click", "#img-speed #addSpeed", function() {
+		var $div = $(this).parent().parent();
+		var $clone = $div.clone();
+		$clone.find(':text').val(''); //清空文本
+		$div.after($clone);
+	});
+	
+	$(document).on("click", "#img-speed #deleteSpeed", function() {
+		 if($("fieldset #img-speed").length == 1){
+			 alert("至少要一个!");
+			 return false;
+		 }
+		 $(this).parent().parent().remove();
+	});
+	
+
+	
+	 
 </script>
 
 </head>
@@ -114,6 +148,7 @@ $(document).ready(function () {
 						<div class="span8 stepContext" >
 							<fieldset>
 								<legend><small>基本信息</small></legend>
+								
 
 								<div class="control-group">
 									<label class="control-label">网台名称</label>
@@ -142,6 +177,41 @@ $(document).ready(function () {
 										 <input type="text"  value="" class="input-large" /> 
 									</div>
 								</div>
+								
+								<div class="control-group">
+									<label class="control-label">资源类型</label>
+									<div class="controls">
+										<label class="radio"> <input type="radio"
+											id="resourceType" value="1" name="resourceType" />生产资源
+										</label> <label class="radio"> <input type="radio"
+											id="resourceType" value="2" name="resourceType"
+											checked="checked" /> 测试/演示资源
+										</label> <label class="radio"> <input type="radio"
+											id="resourceType" value="3" name="resourceType" /> 公测资源
+										</label>
+									</div>
+								</div>
+
+
+								<div class="control-group">
+									<label class="control-label">申请开始时间</label>
+									<div class="controls">
+										<div class="input-append">
+											<input type="text" size="16" id="serviceStart"
+												name="serviceStart" readonly="readonly" class="input-small" /> &mdash; <input type="text" size="16" id="serviceEnd"
+												name="serviceEnd" readonly="readonly" class="input-small" />
+										</div>
+									</div>
+
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">申请用途</label>
+									<div class="controls">
+										<textarea rows="2" id="usage" name="usage"
+											class="input-large"></textarea>
+									</div>
+								</div>
 
 
 								 
@@ -157,26 +227,33 @@ $(document).ready(function () {
 								
 							<fieldset>
 								<legend><small>MDN</small></legend>
-								
-									<div class="control-group">
-									<label class="control-label">页面加速</label>
-									<div class="controls">
-										 <input type="text"  value="" class="input-large" /> 
+									
+								<div class="page-header"><small>页面加速</small></div>
+								<div class="control-group" id="page-speed">
+										<label class="control-label"></label>
+										<div class="controls">
+											 <input type="text"  value="111" class="input-large" /> 
+											 <a class="btn" id="deleteSpeed">删除</a>
+											 <a class="btn btn-success" id="addSpeed">新增</a>
+										</div>
 									</div>
-								</div>
+									
 						
-							<div class="control-group">
-									<label class="control-label">图片加速</label>
-									<div class="controls">
-										 <input type="text"  value="" class="input-large" /> 
+								<div class="page-header">图片加速</div>
+								<div class="control-group" id="img-speed">
+										<label class="control-label"></label>
+										<div class="controls" >
+											 <input type="text"  value="222" class="input-large" /> 
+											 <a class="btn" id="deleteSpeed">删除</a>
+											 <a class="btn btn-success" id="addSpeed">新增</a>
+										</div>
 									</div>
-								</div>
 									
 									
 									<fieldset>
 										<legend><small>节点</small></legend>
-										<div style="overflow: auto;height: 12em">
-									<table class="table   table-condensed  ">
+										<div style="overflow: auto;height: 12em" class="span3">
+											<table class="table   table-condensed  ">
 											<thead>
 												<tr>
 													<th><input type="checkbox" id="" name="netNodes"/></th>
