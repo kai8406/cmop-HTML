@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Sobey--云平台服务-收录申请</title>
+<!-- Le styles -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="jquery-ui/css/overcast/jquery-ui-1.8.21.custom.css"
+	rel="stylesheet">
+<link href="css/cmop.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+     <script src="js/html5.js"></script>
+    <![endif]-->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
+<script src="js/cmop.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		//聚焦指定的Tab
+		$("#support-tab").addClass("active");
+
+		switchTab();
+
+		$("#cp-bar").addClass("active").find("i").addClass("icon-white");
+
+		//起始时间
+		$("#serviceStart").datepicker();
+		$("#serviceEnd").datepicker();
+
+		$("#serviceStart").val(getDateByMonthNum(0)); // 一个月后的日期
+		$("#serviceEnd").val(getDateByMonthNum(1)); // 一个月后的日期
+
+		inputServiceDate();
+
+	});
+</script>
+
+</head>
+<body>
+
+	<div class="container">
+
+		<!-- Header -->
+		<div class="page-header">
+			<h1>
+				Sobey<small>--云平台服务</small>
+			</h1>
+		</div>
+
+		<!-- Menu -->
+		<div id="menu">
+			<ul class="nav nav-tabs">
+				<li id="home-tab"><a href="./Home.html">主页</a></li>
+				<li id="support-tab"><a href="./SupportList.html">服务申请</a></li>
+				<li id="feature-tab"><a href="./FeatureList.html">服务变更</a></li>
+				<li id="bug-tab"><a href="./BugList.html">故障申报</a></li>
+				<li id="audit-tab"><a href="./AuditList.html">审核</a></li>
+				<li><a href="./Login.html">退出登录</a></li>
+			</ul>
+		</div>
+
+		<div class="row">
+
+			<div id="leftbar" class="span2">
+				<ul class="nav nav-list">
+					<li class="nav-header">我的申请</li>
+					<li id="all-bar"><a href="./ECSList.html"><i id="all-icon"
+							class="icon-hdd"></i>All</a></li>
+					<li class="divider"></li>
+					<li class="nav-header">基础架构服务</li>
+					<li id="ecs-bar"><a href="./ECSList.html"><i id="ecs-icon"
+							class="icon-retweet"></i>ECS</a></li>
+					<li id="es3-bar"><a href="./ES3List.html"><i id="es3-icon"
+							class="icon-inbox"></i>ES3</a></li>
+					<li id="eip-bar"><a href="./EIPList.html"><i id="eip-icon"
+							class="icon-file"></i>EIP</a></li>
+					<li id="elb-bar"><a href="./ELBList.html"><i id="elb-icon"
+							class="icon-cog"></i>ELB</a></li>
+					<li id="esg-bar"><a href="#"><i id="esg-icon"
+							class="icon-cog"></i>ESG</a></li>
+					<li class="divider"></li>
+					<li class="nav-header">平台服务</li>
+					<li id="mdn-bar"><a href="./MDNList.html"><i id="mdn-icon"
+							class="icon-user"></i>MDN</a></li>
+					<li id="cp-bar"><a href="./cpList.html"><i id="cp-icon"
+							class="icon-user"></i>云生产</a></li>
+					<li class="divider"></li>
+					<li class="nav-header">软件服务</li>
+					<li id="bsp-bar"><a href="./BSPList.html"><i id="mdn-con"
+							class="icon-user"></i>BSP</a></li>
+					<li><a href="#"><i class="icon-user"></i>数据加工</a></li>
+					<li><a href="#"><i class="icon-user"></i>拆条</a></li>
+					<li><a href="#"><i class="icon-user"></i>编目</a></li>
+				</ul>
+			</div>
+
+			<div id="main" class="span10">
+
+				<div>
+					<div class="step">
+						<img alt="" src="./img/stepCurrent.png"> <img alt=""
+							src="./img/step.png"> <img alt="" src="./img/stepEnd.png">
+					</div>
+
+					<div class="step hidden">
+						<img alt="" src="./img/stepOver.png"> <img alt=""
+							src="./img/stepCurrent.png"> <img alt=""
+							src="./img/stepEnd.png">
+					</div>
+
+					<div class="step hidden">
+						<img alt="" src="./img/stepOver.png"> <img alt=""
+							src="./img/stepOver.png"> <img alt=""
+							src="./img/stepLast.png">
+					</div>
+				</div>
+
+				<form action="./SupportList.html" class="form-horizontal">
+
+
+					<div class="tab-content">
+
+						<!-- 第1步 -->
+						<div class="span8 stepContext">
+							<fieldset>
+								<legend>
+									<small>基本信息</small>
+								</legend>
+
+								<div class="control-group">
+									<label class="control-label">资源类型</label>
+									<div class="controls">
+										<label class="radio"> <input type="radio"
+											id="resourceType" value="1" name="resourceType" />生产资源
+										</label> <label class="radio"> <input type="radio"
+											id="resourceType" value="2" name="resourceType"
+											checked="checked" /> 测试/演示资源
+										</label> <label class="radio"> <input type="radio"
+											id="resourceType" value="3" name="resourceType" /> 公测资源
+										</label>
+									</div>
+								</div>
+
+
+								<div class="control-group">
+									<label class="control-label">申请开始时间</label>
+									<div class="controls">
+										<div class="input-append">
+											<input type="text" size="16" id="serviceStart"
+												name="serviceStart" readonly="readonly" class="input-small" />
+											&mdash; <input type="text" size="16" id="serviceEnd"
+												name="serviceEnd" readonly="readonly" class="input-small" />
+										</div>
+									</div>
+
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">申请用途</label>
+									<div class="controls">
+										<textarea rows="2" id="usage" name="usage" class="input-large"></textarea>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">服务开通优先级</label>
+									<div class="controls">
+										<select name="businessType" id="businessType">
+											<option value="1">普通</option>
+											<option value="2">高</option>
+											<option value="3">紧急</option>
+										</select>
+									</div>
+								</div>
+
+
+							</fieldset>
+
+							<div class="form-actions">
+								<a id="nextStep" class="btn btn-info">下一步</a>
+							</div>
+						</div>
+
+
+						<!-- 第2步 -->
+						<div class="hidden stepContext span8">
+
+
+							<fieldset>
+								<legend>点播信息</legend>
+
+								<div class="control-group">
+									<label class="control-label">收录URL</label>
+									<div class="controls">
+										<input type="text" id="recordUrl" name="recordUrl" size="16">
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">收录码率</label>
+									<div class="controls">
+										<select id="recordRate" name="recordRate">
+											<option value="1">800K</option>
+											<option value="2">1M</option>
+											<option value="3">2M</option>
+											<option value="4">4M</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">收录时段</label>
+									<div class="controls">
+										<select id="recordTime" name="recordTime" multiple="multiple">
+											<option value="1">0-1</option>
+											<option value="2">1-2</option>
+											<option value="3">2-3</option>
+											<option value="4">3-4</option>
+											<option value="5">4-5</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">输出编码</label>
+									<div class="controls">
+										<select id="outputEncode" name="outputEncode"
+											multiple="multiple">
+											<option value="1">MP4_H264-500K_AAC_32K</option>
+											<option value="2">FLV_VP6-800K_MP3_64K</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label">发布接口地址</label>
+									<div class="controls">
+										<input type="text" id="pushInterface" name="pushInterface"
+											size="16">
+									</div>
+								</div>
+
+
+								<div class="control-group">
+									<label for="inlineCheckboxes" class="control-label">&nbsp;</label>
+									<div class="controls">
+										<label class="checkbox inline"> <input type="checkbox"
+											id="isPush" name="isPush" value="1">推送内容交易平台
+										</label>
+									</div>
+								</div>
+
+
+								<fieldset>
+									<legend>
+										<small>视频配置</small>
+									</legend>
+									<div class="control-group">
+										<label class="control-label">FTP上传IP</label>
+										<div class="controls">
+											<input type="text" id="ftpIp" name="ftpIp" size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">端口</label>
+										<div class="controls">
+											<input type="text" id="ftpPort" name="ftpPort" size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">用户名</label>
+										<div class="controls">
+											<input type="text" id="ftpUserName" name="ftpUserName"
+												size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">FTP密码</label>
+										<div class="controls">
+											<input type="text" id="ftpPassword" name="ftpPassword"
+												size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">FTP根路径</label>
+										<div class="controls">
+											<input type="text" id="ftpRootPath" name="ftpRootPath"
+												size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">FTP上传路径</label>
+										<div class="controls">
+											<input type="text" id="ftpUpLoadPath" name="ftpUpLoadPath"
+												size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">输出组类型</label>
+										<div class="controls">
+											<input type="text" id="outType" name="outType" size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">输出方式配置</label>
+										<div class="controls">
+											<label class="radio inline"> <input type="radio"
+												id="outConfig1" name="outConfig" value="1" checked="checked" />默认
+											</label> <label class="radio inline"> <input type="radio"
+												id="outConfig2" name="outConfig" value="1" />切片
+											</label>
+										</div>
+									</div>
+
+								</fieldset>
+
+								<fieldset>
+									<legend>
+										<small>图片配置</small>
+									</legend>
+									<div class="control-group">
+										<label class="control-label">FTP上传IP</label>
+										<div class="controls">
+											<input type="text" id="ftpImageIp" name="ftpImageIp"
+												size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">端口</label>
+										<div class="controls">
+											<input type="text" id="ftpImagePort" name="ftpImagePort"
+												size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">用户名</label>
+										<div class="controls">
+											<input type="text" id="ftpImageUserName"
+												name="ftpImageUserName" size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">FTP密码</label>
+										<div class="controls">
+											<input type="text" id="ftpImagePassword"
+												name="ftpImagePassword" size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">FTP根路径</label>
+										<div class="controls">
+											<input type="text" id="ftpRootImagePath"
+												name="ftpRootImagePath" size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">FTP上传路径</label>
+										<div class="controls">
+											<input type="text" id="ftpUpLoadImagePath"
+												name="ftpUpLoadImagePath" size="16">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">输出组类型</label>
+										<div class="controls">
+											<input type="text" id="imageOutType" name="imageOutType"
+												size="16">
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">输出媒体类型</label>
+										<div class="controls">
+											<input type="text" id="imageOutMediaType"
+												name="imageOutMediaType" size="16">
+										</div>
+									</div>
+
+								</fieldset>
+
+								<div class="control-group">
+									<label class="control-label">拆条节目单上传</label>
+									<div class="controls">
+										<input type="file" id="updateLoads">
+									</div>
+								</div>
+
+							</fieldset>
+
+							<div class="form-actions">
+								<a id="backStep" class="btn">返回</a> <a id="nextStep"
+									class="btn btn-info">下一步</a>
+							</div>
+						</div>
+
+
+						<!-- 第3步 -->
+						<div class="hidden stepContext span8">
+							<fieldset>
+								<legend>云生产详情</legend>
+
+							</fieldset>
+
+							<div class="form-actions">
+								<a id="backStep" class="btn ">返回</a>
+								<button class="btn btn-primary">保存修改</button>
+							</div>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<div id="footer" class="span12">Copyright &copy; 2005-2012 Sobey</div>
+
+	</div>
+</body>
+</html>
