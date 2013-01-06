@@ -22,70 +22,46 @@
 <script src="jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
 
 <script>
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
+		//起始时间
+		$("#serviceStart").datepicker();
+		$("#serviceEnd").datepicker();
 
-				//起始时间
-				$("#serviceStart").datepicker();
-				$("#serviceEnd").datepicker();
+		addParam("#saveEmail");
+		addParam("#savePhone");
+		addParam("#savePort");
+		addParam("#saveProcess");
 
-				//添加邮件列表
-				$("#addEmail")
-						.click(
-								function() {
-									var tempArray = [];
-									$("#emailList > option").each(function() {
-										tempArray.push(this.value);
-									});
-									var $inputEmail = $("#inputEmail").val();
-									//输入框没有值
-									if ($inputEmail != ''
-											&& $
-													.inArray($inputEmail,
-															tempArray) == -1) {
-										$("#emailList").append(
-												"<option value='"+$inputEmail+"'>"
-														+ $inputEmail
-														+ "</option>")
-										$("#inputEmail").val('');
-										tempArray = [];
-									}
-								});
+		$("#instanceListModalSave").click(function() {
 
-				//删除邮件列表
-				$("#deleteEmail").click(function() {
-					$("#emailList > option:selected").remove();
-				});
+			$("#testDiv").removeClass("hide");
 
-				//添加手机列表
-				$("#addPhone")
-						.click(
-								function() {
-									var tempArray = [];
-									$("#phoneList > option").each(function() {
-										tempArray.push(this.value);
-									});
-									var $inputPhone = $("#inputPhone").val();
-									//输入框没有值
-									if ($inputPhone != ''
-											&& $
-													.inArray($inputPhone,
-															tempArray) == -1) {
-										$("#phoneList").append(
-												"<option value='"+$inputPhone+"'>"
-														+ $inputPhone
-														+ "</option>")
-										$("#inputPhone").val('');
-										tempArray = [];
-									}
-								});
+			$("#monitorList").append("");
+		});
 
-				//删除手机列表
-				$("#deletePhone").click(function() {
-					$("#phoneList > option:selected").remove();
-				});
+		$("#elbListModalSave").click(function() {
+			$("#testDiv2").removeClass("hide");
+		});
 
-			});
+		$(".deleteStorage").click(function() {
+			$(this).parent().remove();
+		});
+
+	});
+
+	function addParam(objId) {
+		$(document).on("click", objId, function() {
+			if ($(this).hasClass("disabled")) {
+				$(this).parent().parent().remove();
+			} else {
+				var $tr = $(this).closest('.clone_tr');
+				var $clone = $tr.clone();
+				$clone.find(':text').val(''); //清空文本
+				$tr.after($clone);
+				$(this).removeClass("").addClass("disabled").html("Remove");
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -151,56 +127,384 @@
 						<div class="control-group">
 							<label class="control-label">监控发送邮件列表</label>
 							<div class="controls">
-								<div class="row">
-									<div class="span2">
-										<select multiple="multiple" id="emailList"></select>
-									</div>
-									<div class="span1 row">
-										<div class="span1">
-											<a href="#" class="btn" id="addEmail">添加</a>
-										</div>
-										<div class="span1">
-											<a href="#" class="btn" id="deleteEmail">删除</a>
-										</div>
-									</div>
-									<div class="span2">
-										<input type="text" class="input-small" id="inputEmail">
-									</div>
-								</div>
+								<table id="email_table"
+									class="table table-bordered table-condensed span3">
+									<tbody>
+										<tr class="clone_tr">
+											<td><input type="text" class="input-medium" /></td>
+											<td><a class="btn " id="saveEmail">Save</a></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label class="control-label">监控发送短信手机号码列表</label>
+							<label class="control-label">监控发送短信手机号码</label>
 							<div class="controls">
-								<div class="row">
-									<div class="span2">
-										<select multiple="multiple" id="phoneList"></select>
-									</div>
-									<div class="span1 row">
-										<div class="span1">
-											<a href="#" class="btn" id="addPhone">添加</a>
-										</div>
-										<div class="span1">
-											<a href="#" class="btn" id="deletePhone">删除</a>
-										</div>
-									</div>
-									<div class="span2">
-										<input type="text" class="input-small" id="inputPhone">
-									</div>
-								</div>
+								<table id="phone_table"
+									class="table table-bordered table-condensed span3">
+									<tbody>
+										<tr class="clone_tr">
+											<td><input type="text" class="input-medium" /></td>
+											<td><a class="btn " id="savePhone">Save</a></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 
-						<div>
-							<button class="btn btn-primary" type="submit">保存修改</button>
-							<button class="btn">取消</button>
+						<hr>
+
+						<div class="control-group">
+							<label class="control-label"></label>
+							<div class="controls">
+								<a class="btn btn-success" id="createSeviceMonitor">新建服务器监控</a>
+								<a class="btn btn-success" href="#elbListModal"
+									data-toggle="modal" id="createElbMonitor">新建负载均衡监控</a>
+							</div>
 						</div>
+
+
+						<div class="control-group" id="seviceMonitorDiv">
+
+							<div class="row">
+								<div class="span8">
+									<input type="checkbox" name="" /><span>CPU占用率</span> 报警阀值 <select
+										class="input-small">
+										<option>90%</option>
+									</select> 紧急阀值 <select class="input-small">
+										<option>90%</option>
+									</select>
+								</div>
+								<div class="span8">
+									<input type="checkbox" name="" /><span>内存占用率</span> 报警阀值 <select
+										class="input-small">
+										<option>90%</option>
+									</select> 紧急阀值 <select class="input-small">
+										<option>90%</option>
+									</select>
+								</div>
+								<div class="span8">
+									<input type="checkbox" name="" /><span>硬盘可用率</span> 报警阀值 <select
+										class="input-small">
+										<option>90%</option>
+									</select> 紧急阀值 <select class="input-small">
+										<option>90%</option>
+									</select>
+								</div>
+								<div class="span8">
+									<input type="checkbox" name="" /><span>网络丢包率</span> 报警阀值 <select
+										class="input-small">
+										<option>90%</option>
+									</select> 紧急阀值 <select class="input-small">
+										<option>90%</option>
+									</select>
+								</div>
+								<div class="span8">
+									<input type="checkbox" name="" /><span>网络延时率</span> 报警阀值 <select
+										class="input-small">
+										<option>90%</option>
+									</select> 紧急阀值 <select class="input-small">
+										<option>90%</option>
+									</select>
+								</div>
+								
+								<div class="span8">
+									<input type="checkbox" name="" /><span>最大进程数 </span> 报警阀值 <input
+										type="text" class="input-small" /> 紧急阀值 <input type="text"
+										class="input-small" />
+								</div>
+
+							</div>
+
+							<a class="btn btn-success" href="#instanceListModal"
+								data-toggle="modal">选择服务器</a>
+
+						</div>
+
+
+						<div id="monitorList">
+
+							<div id="testDiv" class="alert alert-block alert-error fade in ">
+								<button data-dismiss="alert" class="close" type="button">×</button>
+								<h4 class="alert-heading">服务器监控</h4>
+								<p>
+									服务器实例:ecs-MFSInNow(oneCMDB测试) &nbsp; IP:172.20.14.171 <br>
+									<br> <span> /WEBTV 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <span> /WEBTV2 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <br> CPU占用率 报警阀值 95% 紧急阀值 99% <br> 内存占用率 报警阀值 95%
+									紧急阀值 99% <br> 最大进程数 报警阀值 95% 紧急阀值 99% <br> <br>
+								</p>
+
+								<div class="row">
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div id="testDiv" class="alert alert-block alert-error fade in ">
+								<button data-dismiss="alert" class="close" type="button">×</button>
+								<h4 class="alert-heading">服务器监控</h4>
+								<p>
+									服务器实例:ecs-MFSInNow(oneCMDB测试) &nbsp; IP:172.20.14.171 <br>
+									<br> <span> /WEBTV 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <span> /WEBTV2 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <br> CPU占用率 报警阀值 95% 紧急阀值 99% <br> 内存占用率 报警阀值 95%
+									紧急阀值 99% <br> 最大进程数 报警阀值 95% 紧急阀值 99% <br> <br>
+								</p>
+
+								<div class="row">
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div id="testDiv" class="alert alert-block alert-error fade in ">
+								<button data-dismiss="alert" class="close" type="button">×</button>
+								<h4 class="alert-heading">服务器监控</h4>
+								<p>
+									服务器实例:ecs-MFSInNow(oneCMDB测试) &nbsp; IP:172.20.14.171 <br>
+									<br> <span> /WEBTV 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <span> /WEBTV2 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <br> CPU占用率 报警阀值 95% 紧急阀值 99% <br> 内存占用率 报警阀值 95%
+									紧急阀值 99% <br> 最大进程数 报警阀值 95% 紧急阀值 99% <br> <br>
+								</p>
+
+								<div class="row">
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div id="testDiv" class="alert alert-block alert-error fade in ">
+								<button data-dismiss="alert" class="close" type="button">×</button>
+								<h4 class="alert-heading">服务器监控</h4>
+								<p>
+									服务器实例:ecs-MFSInNow(oneCMDB测试) &nbsp; IP:172.20.14.171 <br>
+									<br> <span> /WEBTV 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <span> /WEBTV2 报警阀值 95% 紧急阀值 99% <a
+										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
+									</span> <br> CPU占用率 报警阀值 95% 紧急阀值 99% <br> 内存占用率 报警阀值 95%
+									紧急阀值 99% <br> 最大进程数 报警阀值 95% 紧急阀值 99% <br> <br>
+								</p>
+
+								<div class="row">
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span3">
+										<div class="row">
+											<div class="span3">
+												监控端口
+												<div class="row clone_tr">
+													<div class="span2">
+														<input type="text" class="input-medium" />
+													</div>
+													<div class="span1">
+														<a class="btn " id="savePort">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="testDiv2"
+								class="alert alert-block alert-error fade in ">
+								<button data-dismiss="alert" class="close" type="button">×</button>
+								<h4 class="alert-heading">负载均衡监控</h4>
+								<p>负载均衡标识符:elb-MFSInNow &nbsp; 负载均衡关联内网IP:172.20.14.171
+									&nbsp;
+							</div>
+
+						</div>
+
+						<div class="form-actions">
+							<a id="backStep" class="btn ">返回</a>
+							<button class="btn btn-primary">保存修改</button>
+						</div>
+
 					</fieldset>
 				</div>
 			</div>
 
 		</form>
+
+
+		<div id="instanceListModal" class="modal hide fade form-horizontal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4>实例列表</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-striped table-bordered table-condensed">
+					<colgroup>
+						<col class="span1">
+						<col class="span1">
+					</colgroup>
+					<thead>
+						<tr>
+							<th><input type="checkbox" /></th>
+							<th>标识符</th>
+							<th>IP</th>
+						</tr>
+					</thead>
+					<tbody id="instanceList">
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td>ecs-MFSInNow(oneCMDB测试)</td>
+							<td>172.20.14.171</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a class="btn" data-dismiss="modal">取消</a> <a
+					id="instanceListModalSave" data-dismiss="modal"
+					class="btn btn-primary">确定</a>
+			</div>
+		</div>
+
+		<div id="elbListModal" class="modal hide fade form-horizontal"
+			style="width: 60%">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4>负载均衡列表列表</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-striped table-bordered table-condensed">
+					<colgroup>
+						<col class="span1">
+						<col class="span1">
+					</colgroup>
+					<thead>
+						<tr>
+							<th><input type="checkbox" /></th>
+							<th>标识符</th>
+							<th>公网IP</th>
+							<th>负载均衡关联端口</th>
+						</tr>
+					</thead>
+					<tbody id="elbList">
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td>elb-MFSInNow(oneCMDB测试)</td>
+							<td>172.20.14.171</td>
+							<td>80</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a class="btn" data-dismiss="modal">取消</a> <a id="elbListModalSave"
+					data-dismiss="modal" class="btn btn-primary">确定</a>
+			</div>
+		</div>
 
 		<!-- Footer -->
 		<div id="footer" class="span12">Copyright &copy; 2005-2012 Sobey</div>
