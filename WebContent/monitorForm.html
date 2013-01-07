@@ -27,10 +27,7 @@
 		$("#serviceStart").datepicker();
 		$("#serviceEnd").datepicker();
 
-		addParam("#saveEmail");
-		addParam("#savePhone");
-		addParam("#savePort");
-		addParam("#saveProcess");
+		addParam(".saveParam")
 
 		$("#instanceListModalSave").click(function() {
 
@@ -128,11 +125,12 @@
 							<label class="control-label">监控发送邮件列表</label>
 							<div class="controls">
 								<table id="email_table"
-									class="table table-bordered table-condensed span3">
+									class="table table-bordered table-condensed"
+									style="width: 75px">
 									<tbody>
 										<tr class="clone_tr">
 											<td><input type="text" class="input-medium" /></td>
-											<td><a class="btn " id="saveEmail">Save</a></td>
+											<td><a class="btn saveParam">Save</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -143,11 +141,12 @@
 							<label class="control-label">监控发送短信手机号码</label>
 							<div class="controls">
 								<table id="phone_table"
-									class="table table-bordered table-condensed span3">
+									class="table table-bordered table-condensed"
+									style="width: 75px">
 									<tbody>
 										<tr class="clone_tr">
 											<td><input type="text" class="input-medium" /></td>
-											<td><a class="btn " id="savePhone">Save</a></td>
+											<td><a class="btn saveParam">Save</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -167,59 +166,67 @@
 
 
 						<div class="control-group" id="seviceMonitorDiv">
+							<label class="control-label"></label>
+							<div class="controls">
 
-							<div class="row">
-								<div class="span8">
-									<input type="checkbox" name="" /><span>CPU占用率</span> 报警阀值 <select
-										class="input-small">
-										<option>90%</option>
-									</select> 紧急阀值 <select class="input-small">
-										<option>90%</option>
-									</select>
-								</div>
-								<div class="span8">
-									<input type="checkbox" name="" /><span>内存占用率</span> 报警阀值 <select
-										class="input-small">
-										<option>90%</option>
-									</select> 紧急阀值 <select class="input-small">
+								<div class="checkbox">
+									<input type="checkbox" value="option1"
+										name="optionsCheckboxList1"> CPU占用率 &nbsp; 报警阀值 <select
+										class="span1">
+										<option>&gt;5%</option>
+										<option>&gt;90%</option>
+									</select> &nbsp; 严重警告阀值 <select class="span1">
 										<option>90%</option>
 									</select>
 								</div>
-								<div class="span8">
-									<input type="checkbox" name="" /><span>硬盘可用率</span> 报警阀值 <select
-										class="input-small">
+
+								<div class="checkbox">
+									<input type="checkbox" value="option1"
+										name="optionsCheckboxList1"> 内存占用率 &nbsp; 报警阀值 <select
+										class="span1">
 										<option>90%</option>
-									</select> 紧急阀值 <select class="input-small">
-										<option>90%</option>
-									</select>
-								</div>
-								<div class="span8">
-									<input type="checkbox" name="" /><span>网络丢包率</span> 报警阀值 <select
-										class="input-small">
-										<option>90%</option>
-									</select> 紧急阀值 <select class="input-small">
+									</select> &nbsp; 严重警告阀值 <select class="span1">
 										<option>90%</option>
 									</select>
 								</div>
-								<div class="span8">
-									<input type="checkbox" name="" /><span>网络延时率</span> 报警阀值 <select
-										class="input-small">
-										<option>90%</option>
-									</select> 紧急阀值 <select class="input-small">
+								<div class="checkbox">
+									<input type="checkbox" value="option1"
+										name="optionsCheckboxList1"> 硬盘可用率 &nbsp; 报警阀值 <select
+										class="span1">
+										<option>&lt;90%</option>
+									</select> &nbsp; 严重警告阀值 <select class="span1">
 										<option>90%</option>
 									</select>
 								</div>
-								
-								<div class="span8">
-									<input type="checkbox" name="" /><span>最大进程数 </span> 报警阀值 <input
-										type="text" class="input-small" /> 紧急阀值 <input type="text"
-										class="input-small" />
+								<div class="checkbox">
+									<input type="checkbox" value="option1"
+										name="optionsCheckboxList1"> 网络丢包率 &nbsp; 报警阀值 <select
+										class="span1">
+										<option>90%</option>
+									</select> &nbsp; 严重警告阀值 <select class="span1">
+										<option>90%</option>
+									</select>
+								</div>
+
+								<div class="checkbox">
+									<input type="checkbox" value="option1"
+										name="optionsCheckboxList1"> 网络延时率 &nbsp; 报警阀值 <select
+										class="span1">
+										<option>90%</option>
+									</select> &nbsp; 严重警告阀值 <select class="span1">
+										<option>90%</option>
+									</select>
+								</div>
+
+								<div class="checkbox">
+									<input type="checkbox" value="option1"
+										name="optionsCheckboxList1"> 最大进程数 &nbsp; 报警阀值 <input
+										type="text" class="span1" /> &nbsp; 严重警告阀值 <input type="text"
+										class="span1" />
+
 								</div>
 
 							</div>
-
-							<a class="btn btn-success" href="#instanceListModal"
-								data-toggle="modal">选择服务器</a>
 
 						</div>
 
@@ -249,7 +256,7 @@
 														<input type="text" class="input-medium" />
 													</div>
 													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
+														<a class="btn saveParam">Save</a>
 													</div>
 												</div>
 											</div>
@@ -264,148 +271,7 @@
 														<input type="text" class="input-medium" />
 													</div>
 													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div id="testDiv" class="alert alert-block alert-error fade in ">
-								<button data-dismiss="alert" class="close" type="button">×</button>
-								<h4 class="alert-heading">服务器监控</h4>
-								<p>
-									服务器实例:ecs-MFSInNow(oneCMDB测试) &nbsp; IP:172.20.14.171 <br>
-									<br> <span> /WEBTV 报警阀值 95% 紧急阀值 99% <a
-										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
-									</span> <span> /WEBTV2 报警阀值 95% 紧急阀值 99% <a
-										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
-									</span> <br> CPU占用率 报警阀值 95% 紧急阀值 99% <br> 内存占用率 报警阀值 95%
-									紧急阀值 99% <br> 最大进程数 报警阀值 95% 紧急阀值 99% <br> <br>
-								</p>
-
-								<div class="row">
-									<div class="span3">
-										<div class="row">
-											<div class="span3">
-												监控端口
-												<div class="row clone_tr">
-													<div class="span2">
-														<input type="text" class="input-medium" />
-													</div>
-													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="span3">
-										<div class="row">
-											<div class="span3">
-												监控端口
-												<div class="row clone_tr">
-													<div class="span2">
-														<input type="text" class="input-medium" />
-													</div>
-													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div id="testDiv" class="alert alert-block alert-error fade in ">
-								<button data-dismiss="alert" class="close" type="button">×</button>
-								<h4 class="alert-heading">服务器监控</h4>
-								<p>
-									服务器实例:ecs-MFSInNow(oneCMDB测试) &nbsp; IP:172.20.14.171 <br>
-									<br> <span> /WEBTV 报警阀值 95% 紧急阀值 99% <a
-										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
-									</span> <span> /WEBTV2 报警阀值 95% 紧急阀值 99% <a
-										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
-									</span> <br> CPU占用率 报警阀值 95% 紧急阀值 99% <br> 内存占用率 报警阀值 95%
-									紧急阀值 99% <br> 最大进程数 报警阀值 95% 紧急阀值 99% <br> <br>
-								</p>
-
-								<div class="row">
-									<div class="span3">
-										<div class="row">
-											<div class="span3">
-												监控端口
-												<div class="row clone_tr">
-													<div class="span2">
-														<input type="text" class="input-medium" />
-													</div>
-													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="span3">
-										<div class="row">
-											<div class="span3">
-												监控端口
-												<div class="row clone_tr">
-													<div class="span2">
-														<input type="text" class="input-medium" />
-													</div>
-													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div id="testDiv" class="alert alert-block alert-error fade in ">
-								<button data-dismiss="alert" class="close" type="button">×</button>
-								<h4 class="alert-heading">服务器监控</h4>
-								<p>
-									服务器实例:ecs-MFSInNow(oneCMDB测试) &nbsp; IP:172.20.14.171 <br>
-									<br> <span> /WEBTV 报警阀值 95% 紧急阀值 99% <a
-										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
-									</span> <span> /WEBTV2 报警阀值 95% 紧急阀值 99% <a
-										class="deleteStorage" style="margin-left: 5px;">删除</a> <br>
-									</span> <br> CPU占用率 报警阀值 95% 紧急阀值 99% <br> 内存占用率 报警阀值 95%
-									紧急阀值 99% <br> 最大进程数 报警阀值 95% 紧急阀值 99% <br> <br>
-								</p>
-
-								<div class="row">
-									<div class="span3">
-										<div class="row">
-											<div class="span3">
-												监控端口
-												<div class="row clone_tr">
-													<div class="span2">
-														<input type="text" class="input-medium" />
-													</div>
-													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="span3">
-										<div class="row">
-											<div class="span3">
-												监控端口
-												<div class="row clone_tr">
-													<div class="span2">
-														<input type="text" class="input-medium" />
-													</div>
-													<div class="span1">
-														<a class="btn " id="savePort">Save</a>
+														<a class="btn saveParam">Save</a>
 													</div>
 												</div>
 											</div>
@@ -414,8 +280,8 @@
 								</div>
 							</div>
 
-							<div id="testDiv2"
-								class="alert alert-block alert-error fade in ">
+
+							<div id="testDiv2" class="alert alert-block alert-error fade in ">
 								<button data-dismiss="alert" class="close" type="button">×</button>
 								<h4 class="alert-heading">负载均衡监控</h4>
 								<p>负载均衡标识符:elb-MFSInNow &nbsp; 负载均衡关联内网IP:172.20.14.171
